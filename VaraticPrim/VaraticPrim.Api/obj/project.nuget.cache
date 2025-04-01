@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "VTLhmu52hvI=",
+  "success": false,
+  "projectFilePath": "E:\\Projects\\VaraticPrim\\VaraticPrim\\VaraticPrim.Api\\VaraticPrim.Api.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "Unable to resolve 'Microsoft.AspNetCore.OpenApi (>= 9.0.2)' for 'net9.0'.",
+      "libraryId": "Microsoft.AspNetCore.OpenApi",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
+}

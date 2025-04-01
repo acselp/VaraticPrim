@@ -1,0 +1,6 @@
+﻿services:
+  varaticprim.api:
+    image: varaticprim.api
+    build:
+      context: .
+      dockerfile: VaraticPrim.Api/Dockerfile
