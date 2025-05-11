@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "73MS4Eh3XAc=",
+  "dgSpecHash": "+9KF7gCPuuQ=",
   "success": true,
   "projectFilePath": "E:\\Projects\\VaraticPrim\\VaraticPrim\\VaraticPrim.Domain\\VaraticPrim.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.0-preview.2.25163.2\\microsoft.extensions.configuration.10.0.0-preview.2.25163.2.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.0-preview.2.25163.2\\microsoft.extensions.configuration.abstractions.10.0.0-preview.2.25163.2.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0-preview.2.25163.2\\microsoft.extensions.dependencyinjection.abstractions.10.0.0-preview.2.25163.2.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.options\\10.0.0-preview.2.25163.2\\microsoft.extensions.options.10.0.0-preview.2.25163.2.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.0-preview.2.25163.2\\microsoft.extensions.primitives.10.0.0-preview.2.25163.2.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VaraticPrim.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+03e15a0b0f64dedb68b3a07a2dc4edf65d9e34a2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d06c4e98afd7b52f30c2e0a6c913ac61e9da8d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("VaraticPrim.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VaraticPrim.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
