@@ -37,7 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+
+const props = defineProps<{
+  series: {name: string; data: number[]}[]
+}>()
 
 const options = [
   { value: 'optionOne', label: 'Monthly' },
@@ -45,19 +49,33 @@ const options = [
   { value: 'optionThree', label: 'Annually' },
 ]
 
+const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+]
+
+const getMonths = () => {
+  const finalMonths = [];
+  const internalSeries = props.series ?? []
+  internalSeries[0].data.forEach((item, index) => {
+    finalMonths.push(`${months[index % 12]} ${2016 + (Math.floor((index - 1) / 12))}`)
+  })
+
+  return finalMonths
+}
+
 const selected = ref('optionOne')
 import VueApexCharts from 'vue3-apexcharts'
-
-const series = ref([
-  {
-    name: 'Sales',
-    data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
-  },
-  {
-    name: 'Revenue',
-    data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
-  },
-])
 
 const chartOptions = ref({
   legend: {
@@ -145,6 +163,11 @@ const chartOptions = ref({
     },
   },
 })
+
+watch(() => props.series, () => {
+  chartOptions.value.xaxis.categories = getMonths()
+}, { deep: true, immediate: true })
+
 </script>
 
 <style scoped>

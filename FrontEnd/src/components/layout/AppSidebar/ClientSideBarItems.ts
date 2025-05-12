@@ -1,7 +1,6 @@
 import {
   GridIcon,
-  PieChartIcon, PlugInIcon,
-  TableIcon,
+  PieChartIcon,
   UserCircleIcon
 } from '@/icons'
 import type { SidebarGroup } from '@/components/layout/AppSidebar/types.ts'
@@ -12,12 +11,8 @@ export const clientMenuGroups: SidebarGroup[] = [
     items: [
       {
         icon: UserCircleIcon,
-        name: "Customer",
+        name: "Account",
         subItems: [
-          {
-            name: "Manage customers",
-            path: "/customers",
-          },
           {
             name: "Manage addresses",
             path: "/addresses",
@@ -33,28 +28,14 @@ export const clientMenuGroups: SidebarGroup[] = [
         name: "Billing operations",
         subItems: [
           {
-            name: "Reports",
-            path: "/reports"
+            name: "Pay service",
+            path: "/payments"
           },
           {
-            name: "Billings",
-            path: "/billings"
+            name: "Invoices",
+            path: "/invoices"
           }
         ]
-      },
-      {
-        name: "Counters",
-        icon: TableIcon,
-        subItems: [
-          {
-            name: "Manage counters",
-            path: "/counters"
-          },
-          {
-            name: "Counter installation",
-            path: "/installations"
-          },
-        ],
       },
     ],
   },
@@ -65,14 +46,6 @@ export const clientMenuGroups: SidebarGroup[] = [
         icon: PieChartIcon,
         name: "Service and Support",
         path: "/support"
-      },
-      {
-        icon: PlugInIcon,
-        name: "System settings",
-        subItems: [
-          { name: "Signin", path: "/signin", pro: false },
-          { name: "Signup", path: "/signup", pro: false },
-        ],
       },
     ],
   },

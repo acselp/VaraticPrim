@@ -14,7 +14,12 @@ export const AuthenticationService = {
     return localStorage.getItem(AuthKey) !== null;
   },
 
+  getAuthData(): AuthData {
+    return JSON.parse(atob(localStorage.getItem(AuthKey)));
+  },
+
   isAdmin() {
+    debugger
     const data = localStorage.getItem(AuthKey);
     let result = false;
 

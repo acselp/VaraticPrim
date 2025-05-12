@@ -140,12 +140,44 @@ const router = createRouter({
         title: 'Signup',
       },
     },
+    {
+      path: '/statistics',
+      name: 'Statistics',
+      component: () => import('../views/MyViews/Customers/CustomerStatistics.vue'),
+      meta: {
+        title: 'Statistics',
+      },
+    },
+    {
+      path: '/invoices',
+      name: 'Invoices',
+      component: () => import('../views/MyViews/Billings/Invoices.vue'),
+      meta: {
+        title: 'Invoices',
+      },
+    },
+    {
+      path: '/payments',
+      name: 'Payments',
+      component: () => import('../views/MyViews/Billings/PayService.vue'),
+      meta: {
+        title: 'Payments',
+      },
+    },
+    {
+      path: '/customers',
+      name: 'Customers',
+      component: () => import('../views/MyViews/Customers/ManageCustomers.vue'),
+      meta: {
+        title: 'Customers',
+      },
+    }
   ],
 })
 
 export default router
 
 router.beforeEach((to, from, next) => {
-  document.title = `Vue.js ${to.meta.title} | TailAdmin - Vue.js Tailwind CSS Dashboard Template`
+  document.title = `Vue.js ${to.meta.title} | VaraticPrim - Vue.js Tailwind CSS Dashboard Template`
   next()
 })

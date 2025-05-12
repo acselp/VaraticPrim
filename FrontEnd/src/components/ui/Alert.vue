@@ -1,32 +1,33 @@
 <template>
-  <div :class="['rounded-xl border p-4', variantClasses[variant].container]">
-    <div class="flex items-start gap-3">
-      <div :class="['-mt-0.5', variantClasses[variant].icon]">
-        <component :is="icons[variant]" />
-      </div>
+  <transition v-if="active" name="fade" duration="200">
+    <div :class="['rounded-xl border p-4 absolute right-[5%] top-[15%]', variantClasses[variant].container]">
+      <div class="flex items-start gap-3">
+        <div :class="['-mt-0.5', variantClasses[variant].icon]">
+          <component :is="icons[variant]" />
+        </div>
 
-      <div>
-        <h4 class="mb-1 text-sm font-semibold text-gray-800 dark:text-white/90">
-          {{ title }}
-        </h4>
+        <div>
+          <h4 class="mb-1 text-sm font-semibold text-gray-800 dark:text-white/90">
+            {{ title }}
+          </h4>
 
-        <p class="text-sm text-gray-500 dark:text-gray-400">{{ message }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">{{ message }}</p>
 
-        <router-link
-          v-if="showLink"
-          :to="linkHref"
-          class="inline-block mt-3 text-sm font-medium text-gray-500 underline dark:text-gray-400"
-        >
-          {{ linkText }}
-        </router-link>
+          <router-link
+            v-if="showLink"
+            :to="linkHref"
+            class="inline-block mt-3 text-sm font-medium text-gray-500 underline dark:text-gray-400"
+          >
+            {{ linkText }}
+          </router-link>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
 import { SuccessIcon, ErrorIcon, WarningIcon, InfoCircleIcon } from '@/icons'
-import { computed } from 'vue'
 
 interface AlertProps {
   variant: 'success' | 'error' | 'warning' | 'info'
@@ -35,6 +36,7 @@ interface AlertProps {
   showLink?: boolean
   linkHref?: string
   linkText?: string
+  active: boolean
 }
 
 const props = withDefaults(defineProps<AlertProps>(), {

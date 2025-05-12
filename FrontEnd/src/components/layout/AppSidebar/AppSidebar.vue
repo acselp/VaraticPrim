@@ -20,29 +20,9 @@
       ]"
     >
       <router-link to="/">
-        <img
-          v-if="isExpanded || isHovered || isMobileOpen"
-          class="dark:hidden"
-          src="/images/logo/logo.svg"
-          alt="Logo"
-          width="150"
-          height="40"
-        />
-        <img
-          v-if="isExpanded || isHovered || isMobileOpen"
-          class="hidden dark:block"
-          src="/images/logo/logo-dark.svg"
-          alt="Logo"
-          width="150"
-          height="40"
-        />
-        <img
-          v-else
-          src="/images/logo/logo-icon.svg"
-          alt="Logo"
-          width="32"
-          height="32"
-        />
+        <div class="mb-2 font-semibold text-black-800 text-title-sm text-black/90">
+          Varatic Prim
+        </div>
       </router-link>
     </div>
     <div
@@ -211,21 +191,24 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from "vue-router";
 
 import {
   ChevronDownIcon,
   HorizontalDots,
 } from "../../../icons/index.js";
-import { useSidebar } from "@/composables/useSidebar.js";
-import { menuGroups } from "./AdminSideBarItems.ts";
+import { adminMenuGroups } from '@/components/layout/AppSidebar/AdminSideBarItems.ts'
+import { clientMenuGroups } from '@/components/layout/AppSidebar/ClientSideBarItems.ts'
+import { useSidebar } from '@/composables/useSidebar.ts'
+import type { SidebarGroup } from '@/components/layout/AppSidebar/types.ts'
+import { AuthenticationService, type Roles } from '@/services/AuthenticationService.ts'
 
 const route = useRoute();
 
 const { isExpanded, isMobileOpen, isHovered, openSubmenu } = useSidebar();
 
-
+const menuGroups = ref<SidebarGroup[]>([])
 
 const isActive = (path) => route.path === path;
 
@@ -235,7 +218,7 @@ const toggleSubmenu = (groupIndex, itemIndex) => {
 };
 
 const isAnySubmenuRouteActive = computed(() => {
-  return menuGroups.some((group) =>
+  return menuGroups.value.some((group) =>
     group.items.some(
       (item) =>
         item.subItems && item.subItems.some((subItem) => isActive(subItem.path))
@@ -248,7 +231,7 @@ const isSubmenuOpen = (groupIndex, itemIndex) => {
   return (
     openSubmenu.value === key ||
     (isAnySubmenuRouteActive.value &&
-      menuGroups[groupIndex].items[itemIndex].subItems?.some((subItem) =>
+      menuGroups.value[groupIndex].items[itemIndex].subItems?.some((subItem) =>
         isActive(subItem.path)
       ))
   );
@@ -265,4 +248,19 @@ const startTransition = (el) => {
 const endTransition = (el) => {
   el.style.height = "";
 };
+
+const getMenuGroups = () => {
+  const isAdmin = AuthenticationService.isAdmin();
+  if (isAdmin) {
+    return adminMenuGroups
+  }
+  else {
+    return clientMenuGroups;
+  }
+}
+
+onMounted(() => {
+  menuGroups.value = getMenuGroups()
+})
+
 </script>
