@@ -1,14 +1,12 @@
 ############################
 # Build artifacts
 ############################
-VaraticPrim/bin/
-VaraticPrim/obj/
-VaraticPrim/[Bb]uild/
-VaraticPrim/[Ll]og/
-VaraticPrim/[Ll]ogs/
 
-# If you use Azure Functions local build output
-/VaraticPrim/func.packages/
+/VaraticPrim/**/[Bb]in/
+/VaraticPrim/**/[Oo]bj/
+/VaraticPrim/**/[Bb]uild/
+/VaraticPrim/**/[Ll]og/
+/VaraticPrim/**/[Ll]ogs/
 
 ############################
 # IDE / Editor settings
