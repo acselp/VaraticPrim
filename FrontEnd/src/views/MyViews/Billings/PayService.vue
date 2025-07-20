@@ -37,7 +37,7 @@
       <span class="sr-only">Loading...</span>
     </div>
 
-    <template v-if="!loadingData && imgSrc">
+    <template v-if="!loadingData && imgSrc && isValid">
       <div class="mt-4 p-5 mb-6 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
         <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div>
@@ -189,6 +189,14 @@
       title="Payment successful"
       message="Payment has been successfully done."
     />
+
+
+    <Alert
+      :active="isValidateToastActive"
+      variant="error"
+      title="Validation error"
+      message="Invalid meter data"
+    />
   </admin-layout>
 </template>
 
@@ -208,12 +216,15 @@ const imgSrc = ref()
 const loadingData = ref(false)
 const isPayModalActive = ref(false)
 const isSuccessToastActive = ref(false)
+const isValidateToastActive = ref(false)
+const isValid = ref(true);
 
 const onUpload = (event: InputEvent) => {
   loadingData.value = true
-  const file = event.target.files[0];
+  const file: File = event.target.files[0];
   if (file) {
     file.value = file
+    isValid.value = file.name === "valid.jpg"
     const reader = new FileReader();
     reader.onload = (e) => {
       imgSrc.value = e.target.result;
@@ -223,6 +234,15 @@ const onUpload = (event: InputEvent) => {
 
   setTimeout(() => {
     loadingData.value = false
+
+    if (!isValid.value) {
+      setTimeout(() => {
+        isValidateToastActive.value = true
+        setTimeout(() => {
+          isValidateToastActive.value = false
+        }, 3000)
+      }, 200)
+    }
   }, 2000)
 }
 

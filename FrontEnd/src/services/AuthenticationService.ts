@@ -15,7 +15,16 @@ export const AuthenticationService = {
   },
 
   getAuthData(): AuthData {
-    return JSON.parse(atob(localStorage.getItem(AuthKey)));
+    let data;
+
+    try {
+      data = JSON.parse(atob(localStorage.getItem(AuthKey)));
+    }
+    catch (error: any) {
+      location.href="/signin"
+    }
+
+    return data
   },
 
   isAdmin() {
