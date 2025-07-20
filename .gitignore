@@ -1,0 +1,27 @@
+/VaraticPrim/
+
+############################
+# Build artifacts
+############################
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+
+# If you use Azure Functions local build output
+func.packages/
+
+############################
+# IDE / Editor settings
+############################
+# Visual Studio
+.vs/
+# Rider / IntelliJ
+.idea/
+# VS Code workspace settings (keep if you want shared settings)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
