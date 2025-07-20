@@ -2,11 +2,11 @@
 # Build artifacts
 ############################
 
-/VaraticPrim/**/[Bb]in/
-/VaraticPrim/**/[Oo]bj/
-/VaraticPrim/**/[Bb]uild/
-/VaraticPrim/**/[Ll]og/
-/VaraticPrim/**/[Ll]ogs/
+VaraticPrim/VaraticPrim/**/[Bb]in/
+VaraticPrim/VaraticPrim/**/[Oo]bj/
+VaraticPrim/VaraticPrim/**/[Bb]uild/
+VaraticPrim/VaraticPrim/**/[Ll]og/
+VaraticPrim/VaraticPrim/**/[Ll]ogs/
 
 ############################
 # IDE / Editor settings
