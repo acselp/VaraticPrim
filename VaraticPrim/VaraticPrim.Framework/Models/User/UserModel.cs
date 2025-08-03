@@ -1,4 +1,4 @@
-namespace VaraticPrim.Api.Models.User;
+namespace VaraticPrim.Framework.Models.User;
 
 public class UserModel
 {

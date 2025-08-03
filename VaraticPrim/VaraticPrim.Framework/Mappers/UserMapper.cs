@@ -1,4 +1,3 @@
-using VaraticPrim.Api.Models.User;
 using VaraticPrim.Domain.Entities;
 using VaraticPrim.Framework.Models.User;
 
@@ -19,7 +18,7 @@ public class UserMapper
         return new UserEntity
         {
             Email = model.Email,
-            Password = model.Password
+            PasswordHash = model.Password
         };
     }
 }

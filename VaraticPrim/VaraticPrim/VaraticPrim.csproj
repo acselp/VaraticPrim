@@ -17,6 +17,7 @@
       <ProjectReference Include="..\VaraticPrim.Application\VaraticPrim.Application.csproj" />
       <ProjectReference Include="..\VaraticPrim.Framework\VaraticPrim.Framework.csproj" />
       <ProjectReference Include="..\VaraticPrim.Infrastructure\VaraticPrim.Infrastructure.csproj" />
+      <ProjectReference Include="..\VaraticPrim.JwtAuth\VaraticPrim.JwtAuth.csproj" />
       <ProjectReference Include="..\VaraticPrim.Migrations.Evolve\VaraticPrim.Migrations.Evolve.csproj" />
     </ItemGroup>
 </Project>

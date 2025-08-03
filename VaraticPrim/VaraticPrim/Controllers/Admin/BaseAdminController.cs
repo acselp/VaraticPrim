@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Components;
+using VaraticPrim.Api.Controllers.Shared;
+
 namespace VaraticPrim.Api.Controllers.Admin;
 
-public class BaseAdminController
+[Route("admin/[controller]")]
+public class BaseAdminController : ApiBaseController
 {
-    
 }

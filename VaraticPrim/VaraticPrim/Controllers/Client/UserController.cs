@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VaraticPrim.Domain.Exceptions;
+using VaraticPrim.Framework.Errors.FrontEndErrors;
 using VaraticPrim.Framework.Managers;
 using VaraticPrim.Framework.Models.User;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace VaraticPrim.Api.Controllers.Client;
 
-[Route("[controller]")]
 public class UserController : BaseClientController
 {
     private readonly UserManager _userManager;
@@ -19,12 +22,23 @@ public class UserController : BaseClientController
     {
         return Ok(await _userManager.GetAll());
     }
-    
+
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Create([FromBody] CreateUserModel model)
     {
-        await _userManager.Create(model);
-        
-        return Ok();
+        try
+        {
+            return Ok(await _userManager.Create(model));
+        }
+        catch (ValidationException e)
+        {
+            return ValidationError(e);
+        }
+        catch (UserAlreadyExistsException e)
+        {
+            return BadRequest(FrontEndErrors.UserAlreadyExists.ErrorCode,
+                              FrontEndErrors.UserAlreadyExists.ErrorMessage);
+        }
     }
 }

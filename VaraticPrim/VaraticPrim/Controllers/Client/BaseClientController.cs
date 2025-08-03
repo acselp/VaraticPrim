@@ -1,8 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Components;
+using VaraticPrim.Api.Controllers.Shared;
 
-namespace VaraticPrim.Api.Controllers.Client;
-
-public class BaseClientController : Controller
+namespace VaraticPrim.Api.Controllers.Client
 {
-    
+    [Route("[controller]")]
+    public class BaseClientController : ApiBaseController
+    {
+    }
 }
