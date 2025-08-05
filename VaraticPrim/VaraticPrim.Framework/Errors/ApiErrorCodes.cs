@@ -4,6 +4,7 @@ public static class ApiErrorCodes
 {
     public const string Forbidden           = "forbidden";
     public const string InternalServerError = "internal_server_error";
+    public const string ValidationError     = "validation_error";
 
     public static class Register
     {

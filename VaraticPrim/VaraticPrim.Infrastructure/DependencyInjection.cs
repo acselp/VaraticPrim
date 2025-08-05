@@ -15,12 +15,11 @@ public static class DependencyInjection
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        
-        services.AddControllers(options =>
-                                {
-                                    options.Filters.Add<InternalServerErrorExceptionFilter>();
-                                });
-        
+
+        services.AddControllers(options => { options.Filters.Add<InternalServerErrorExceptionFilter>(); })
+                .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
+
+        services.AddJwt(configuration.GetSection("Jwt"));
         services.AddOptions(configuration);
         services.AddOptions();
         services.AddMigrations(configuration);
@@ -31,11 +30,11 @@ public static class DependencyInjection
         services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
         {
             builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
         }));
     }
-    
+
     private static void AddOptions(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<DbConnectionStringOptions>(configuration.GetSection(DbConnectionStringOptions.SectionName));

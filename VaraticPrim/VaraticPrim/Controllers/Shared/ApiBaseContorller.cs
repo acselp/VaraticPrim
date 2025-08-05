@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using VaraticPrim.Framework.Errors;
 using VaraticPrim.Framework.Errors.ApiError;
+using VaraticPrim.Framework.Errors.FrontEndErrors;
 
 namespace VaraticPrim.Api.Controllers.Shared;
 
@@ -10,11 +11,11 @@ public class ApiBaseController : Controller
 {
     protected IActionResult ValidationError(ValidationException exception)
     {
-        var error = new ApiErrorModel()
+        var error = new ApiErrorModel
                     {
-                        Code = "",
-                        Message = "Could not validate user",
-                        Errors = exception.Errors.Select(it => new ApiErrorModel.ApiError()
+                        Code    = FrontEndErrors.ValidationError.ErrorCode,
+                        Message = FrontEndErrors.ValidationError.ErrorMessage,
+                        Errors = exception.Errors.Select(it => new ApiErrorModel.ApiError
                                                                {
                                                                    AttemptedValue = it.AttemptedValue,
                                                                    ErrorCode      = it.ErrorCode,

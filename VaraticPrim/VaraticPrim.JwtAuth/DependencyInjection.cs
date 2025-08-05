@@ -17,25 +17,24 @@ public static class DependencyInjection
         var jwtConfigSection = configuration.GetSection("Jwt");
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateTokenReplay = true,
-                    ValidIssuer = jwtConfigSection.GetSection("Issuer").Value,
-                    ValidAudience = jwtConfigSection.GetSection("Audience").Value,
-                    ClockSkew = TimeSpan.Zero,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(jwtConfigSection
-                            .GetSection("Key")
-                            .Value))
-                };
+                .AddJwtBearer(options =>
+                 {
+                     options.TokenValidationParameters = new TokenValidationParameters
+                     {
+                         ValidateIssuer      = true,
+                         ValidateAudience    = true,
+                         ValidateLifetime    = true,
+                         ValidateTokenReplay = true,
+                         ValidIssuer         = jwtConfigSection.GetSection("Issuer").Value,
+                         ValidAudience       = jwtConfigSection.GetSection("Audience").Value,
+                         ClockSkew           = TimeSpan.Zero,
+                         IssuerSigningKey = new SymmetricSecurityKey(
+                                                                     Encoding.UTF8.GetBytes(jwtConfigSection
+                                                                                 .GetSection("Key").Value))
+                     };
 
-                options.Events = ConfigureJwtEvents();
-            });
+                     options.Events = ConfigureJwtEvents();
+                 });
     }
 
     private static JwtBearerEvents ConfigureJwtEvents()
@@ -46,7 +45,7 @@ public static class DependencyInjection
             {
                 context.HandleResponse();
 
-                var error = new JsonObject()
+                var error = new JsonObject
                 {
                     ["message"] = "Unauthorized"
                 };
@@ -56,7 +55,7 @@ public static class DependencyInjection
             },
             OnForbidden = context =>
             {
-                var error = new JsonObject()
+                var error = new JsonObject
                 {
                     ["message"] = "Forbidden"
                 };
