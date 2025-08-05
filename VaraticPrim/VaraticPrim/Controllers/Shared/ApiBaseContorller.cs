@@ -12,6 +12,8 @@ public class ApiBaseController : Controller
     {
         var error = new ApiErrorModel()
                     {
+                        Code = "",
+                        Message = "Could not validate user",
                         Errors = exception.Errors.Select(it => new ApiErrorModel.ApiError()
                                                                {
                                                                    AttemptedValue = it.AttemptedValue,

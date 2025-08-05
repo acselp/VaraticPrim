@@ -1,11 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VaraticPrim.Framework;
-using VaraticPrim.Framework.Errors.Filters;
+using VaraticPrim.Framework.Filters;
 using VaraticPrim.Infrastructure.Options;
 using VaraticPrim.Infrastructure.Persistence;
 using VaraticPrim.Infrastructure.Repository;
@@ -20,17 +16,18 @@ public static class DependencyInjection
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         
-        services.AddOptions(configuration);
+        services.AddControllers(options =>
+                                {
+                                    options.Filters.Add<InternalServerErrorExceptionFilter>();
+                                });
         
-        services.AddMvc(options =>
-                        {
-                            options.Filters.Add<InternalServerErrorExceptionFilter>();
-                        });
+        services.AddOptions(configuration);
+        services.AddOptions();
         services.AddMigrations(configuration);
         services.AddFramework();
+        services.AddRepositories();
         services.AddJwt(configuration);
         services.AddDbContext(configuration.GetConnectionString("PostgresConnection"));
-        services.AddRepositories();
         services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
         {
             builder.AllowAnyOrigin()

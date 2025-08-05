@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
+using VaraticPrim.Framework.Errors;
 using VaraticPrim.Framework.Errors.ApiError;
 
-namespace VaraticPrim.Framework.Errors.Filters;
+namespace VaraticPrim.Framework.Filters;
 
 public class InternalServerErrorExceptionFilter : IExceptionFilter
 {

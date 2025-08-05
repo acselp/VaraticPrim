@@ -5,7 +5,6 @@ using VaraticPrim.Framework.Models.Auth;
 
 namespace VaraticPrim.Api.Controllers.Auth;
 
-[Route("[controller]")]
 public class AuthenticationController : ApiBaseController
 {
     private readonly Framework.Managers.AuthenticationManager _authenticationManager;

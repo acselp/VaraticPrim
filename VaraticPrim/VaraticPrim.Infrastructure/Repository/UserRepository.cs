@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using VaraticPrim.Application.Repository;
 using VaraticPrim.Domain.Entities;
 using VaraticPrim.Infrastructure.Persistence;
@@ -8,11 +9,11 @@ public class UserRepository(PostgresDbContext context) : GenericRepository<UserE
 {
     public async Task<UserEntity?> GetByEmail(string email)
     {
-        return Table.FirstOrDefault();
+        return await Table.FirstOrDefaultAsync();
     }
 
     public async Task<bool> UserWithEmailExists(string email)
     {
-        return Table.Any(x => x.Email == email);
+        return await Table.AnyAsync(x => x.Email == email);
     }
 }
