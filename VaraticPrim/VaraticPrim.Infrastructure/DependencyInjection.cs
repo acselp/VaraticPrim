@@ -26,12 +26,14 @@ public static class DependencyInjection
                  })
                 .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
 
+        services.AddJwt(configuration);
+        services.AddAuthorization();
+
         services.AddOptions(configuration);
         services.AddOptions();
         services.AddMigrations(configuration);
         services.AddFramework();
         services.AddRepositories();
-        services.AddJwt(configuration);
         services.AddDbContext(configuration.GetConnectionString("PostgresConnection"));
     }
 
