@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using VaraticPrim.Application.Repository;
+using VaraticPrim.Domain.Exceptions;
 using VaraticPrim.Framework.Helpers;
 using VaraticPrim.Framework.Models.Auth;
 
@@ -7,10 +8,10 @@ namespace VaraticPrim.Framework.Managers;
 
 public class AuthenticationManager
 {
+    private readonly HashHelper                     _hashHelper;
+    private readonly ILogger<AuthenticationManager> _logger;
     private readonly TokenGeneratorHelper           _tokenGeneratorHelper;
     private readonly IUserRepository                _userRepository;
-    private readonly ILogger<AuthenticationManager> _logger;
-    private readonly HashHelper                     _hashHelper;
 
 
     public AuthenticationManager(
@@ -29,17 +30,17 @@ public class AuthenticationManager
     {
         try
         {
-            // _logger.LogInformation("Start authenticating user");
-            // var currentUser = await _userRepository.GetByEmail(loginModel.Email);
-            //
-            // if (currentUser == null || !_hashHelper.PasswordHashMatches(currentUser.PasswordHash,
-            //                                                             loginModel.Password, currentUser.PasswordSalt))
-            // {
-            //     _logger.LogWarning("Wrong email or password");
-            //     throw new Exception("Wrong email or password");
-            // }
+            _logger.LogInformation("Start authenticating user");
+            var currentUser = await _userRepository.GetByEmail(loginModel.Email);
 
-            var accessToken  = _tokenGeneratorHelper.GenerateAccessToken(123);
+            if (currentUser == null || !_hashHelper.PasswordHashMatches(currentUser.PasswordHash,
+                                                                        loginModel.Password, currentUser.PasswordSalt))
+            {
+                _logger.LogWarning("Wrong email or password");
+                throw new WrongPasswordOrEmailException("Wrong email or password");
+            }
+
+            var accessToken  = _tokenGeneratorHelper.GenerateAccessToken(currentUser.Id);
             var refreshToken = _tokenGeneratorHelper.GenerateRefreshToken();
 
             // await _refreshRepository.Insert(
@@ -51,13 +52,13 @@ public class AuthenticationManager
             //     });
 
             return new LoginResultModel
-                   {
-                       AccessToken                = accessToken.AccessToken,
-                       ExpiresIn                  = accessToken.ExpirationTime,
-                       TokenType                  = accessToken.TokenType,
-                       RefreshToken               = refreshToken.Token,
-                       RefreshTokenExpirationTime = refreshToken.Expires
-                   };
+            {
+                AccessToken                = accessToken.AccessToken,
+                ExpiresIn                  = accessToken.ExpirationTime,
+                TokenType                  = accessToken.TokenType,
+                RefreshToken               = refreshToken.Token,
+                RefreshTokenExpirationTime = refreshToken.Expires
+            };
         }
         catch (Exception e)
         {

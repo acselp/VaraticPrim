@@ -1,15 +1,19 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VaraticPrim.Api.Controllers.Shared;
+using VaraticPrim.Domain.Exceptions;
+using VaraticPrim.Framework.Errors.FrontEndErrors;
+using VaraticPrim.Framework.Managers;
 using VaraticPrim.Framework.Models.Auth;
 
 namespace VaraticPrim.Api.Controllers.Auth;
 
+[Route("/auth")]
 public class AuthenticationController : ApiBaseController
 {
-    private readonly Framework.Managers.AuthenticationManager _authenticationManager;
+    private readonly AuthenticationManager _authenticationManager;
 
-    public AuthenticationController(Framework.Managers.AuthenticationManager authenticationManager)
+    public AuthenticationController(AuthenticationManager authenticationManager)
     {
         _authenticationManager = authenticationManager;
     }
@@ -18,8 +22,15 @@ public class AuthenticationController : ApiBaseController
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
     {
-        var model = await _authenticationManager.Login(loginModel);
-        return Ok(model);
+        try
+        {
+            var model = await _authenticationManager.Login(loginModel);
+            return Ok(model);
+        }
+        catch (WrongPasswordOrEmailException e)
+        {
+            return BadRequest(FrontEndErrors.WrongPasswordOrEmailError);
+        }
     }
 
     // [AllowAnonymous]

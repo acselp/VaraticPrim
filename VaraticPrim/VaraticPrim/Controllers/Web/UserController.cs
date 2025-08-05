@@ -35,8 +35,7 @@ public class UserController : BaseClientController
         }
         catch (UserAlreadyExistsException e)
         {
-            return BadRequest(FrontEndErrors.UserAlreadyExists.ErrorCode,
-                              FrontEndErrors.UserAlreadyExists.ErrorMessage);
+            return BadRequest(FrontEndErrors.UserAlreadyExists);
         }
     }
 }

@@ -10,4 +10,9 @@ public static class ApiErrorCodes
     {
         public const string UserAlreadyExists = "user_already_exists";
     }
+
+    public static class Login
+    {
+        public const string WrongPasswordOrEmail = "wrong_password_or_email";
+    }
 }

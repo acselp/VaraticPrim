@@ -12,24 +12,19 @@ public class ApiBaseController : Controller
     protected IActionResult ValidationError(ValidationException exception)
     {
         var error = new ApiErrorModel
-                    {
-                        Code    = FrontEndErrors.ValidationError.ErrorCode,
-                        Message = FrontEndErrors.ValidationError.ErrorMessage,
-                        Errors = exception.Errors.Select(it => new ApiErrorModel.ApiError
-                                                               {
-                                                                   AttemptedValue = it.AttemptedValue,
-                                                                   ErrorCode      = it.ErrorCode,
-                                                                   ErrorMessage   = it.ErrorMessage,
-                                                                   PropertyName   = it.PropertyName
-                                                               })
-                    };
+        {
+            Code    = FrontEndErrors.ValidationError.ErrorCode,
+            Message = FrontEndErrors.ValidationError.ErrorMessage,
+            Errors = exception.Errors.Select(it => new ApiErrorModel.ApiError
+            {
+                AttemptedValue = it.AttemptedValue,
+                ErrorCode      = it.ErrorCode,
+                ErrorMessage   = it.ErrorMessage,
+                PropertyName   = it.PropertyName
+            })
+        };
 
         return BadRequest(error);
-    }
-
-    protected IActionResult BadRequest(ApiErrorModel model)
-    {
-        return RestResponse(HttpStatusCode.BadRequest, model);
     }
 
     protected IActionResult Forbidden(ApiErrorModel model)
@@ -81,10 +76,10 @@ public class ApiBaseController : Controller
                               .SetCode(code);
     }
 
-    protected IActionResult BadRequest(string errorCode, string errorMessage)
+    protected IActionResult BadRequest(Error errorModel)
     {
-        var error = CreateError(errorCode)
-                   .SetMessage(errorMessage)
+        var error = CreateError(errorModel.ErrorCode)
+                   .SetMessage(errorModel.ErrorMessage)
                    .Build();
         return BadRequest(error);
     }

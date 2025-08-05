@@ -9,7 +9,7 @@ public class UserRepository(PostgresDbContext context) : GenericRepository<UserE
 {
     public async Task<UserEntity?> GetByEmail(string email)
     {
-        return await Table.FirstOrDefaultAsync();
+        return await Table.FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task<bool> UserWithEmailExists(string email)
