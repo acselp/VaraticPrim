@@ -7,3 +7,16 @@ CREATE TABLE ${schema}.user
     created_on_utc TIMESTAMPTZ  NOT NULL DEFAULT now(),
     updated_on_utc TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
+
+CREATE TABLE ${schema}.refresh_token
+(
+    id              SERIAL PRIMARY KEY,
+    refresh_token   VARCHAR(255) NOT NULL UNIQUE,
+    user_id         INTEGER      NOT NULL
+        REFERENCES ${schema}.user (id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+    expiration_time timestamp,
+    created_on_utc  TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    updated_on_utc  TIMESTAMPTZ  NOT NULL DEFAULT now()
+);

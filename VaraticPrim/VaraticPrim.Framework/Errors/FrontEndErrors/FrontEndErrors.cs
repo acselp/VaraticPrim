@@ -19,4 +19,10 @@ public static class FrontEndErrors
         ErrorCode    = ApiErrorCodes.Login.WrongPasswordOrEmail,
         ErrorMessage = "Wrong password or email"
     };
+
+    public static Error InvalidRefreshTokenOrAccessTokenError { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Login.InvalidRefreshTokenOrAccessToken,
+        ErrorMessage = "Invalid refresh token or access token"
+    };
 }

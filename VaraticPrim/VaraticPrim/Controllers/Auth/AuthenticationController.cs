@@ -5,6 +5,7 @@ using VaraticPrim.Domain.Exceptions;
 using VaraticPrim.Framework.Errors.FrontEndErrors;
 using VaraticPrim.Framework.Managers;
 using VaraticPrim.Framework.Models.Auth;
+using VaraticPrim.Framework.Models.Token;
 
 namespace VaraticPrim.Api.Controllers.Auth;
 
@@ -33,11 +34,17 @@ public class AuthenticationController : ApiBaseController
         }
     }
 
-    // [AllowAnonymous]
-    // [HttpPost("refresh-token")]
-    // public async Task<IActionResult> LoginByRefreshToken([FromBody] LoginByRefreshTokenModel tokenModel)
-    // {
-    //     var model = await _authenticationManager.LoginByRefreshToken(tokenModel.RefreshToken);
-    //     return Ok(model);
-    // }
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> LoginByRefreshToken([FromBody] LoginByRefreshTokenModel tokenModel)
+    {
+        try
+        {
+            var model = await _authenticationManager.LoginByRefreshToken(tokenModel.RefreshToken);
+            return Ok(model);
+        }
+        catch (InvalidAccessTokenOrRefreshTokenException e)
+        {
+            return BadRequest(FrontEndErrors.InvalidRefreshTokenOrAccessTokenError);
+        }
+    }
 }

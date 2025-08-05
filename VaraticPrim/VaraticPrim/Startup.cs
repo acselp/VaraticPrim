@@ -20,6 +20,7 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+        app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
     }

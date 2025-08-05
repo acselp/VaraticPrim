@@ -13,6 +13,7 @@ public static class ApiErrorCodes
 
     public static class Login
     {
-        public const string WrongPasswordOrEmail = "wrong_password_or_email";
+        public const string WrongPasswordOrEmail             = "wrong_password_or_email";
+        public const string InvalidRefreshTokenOrAccessToken = "invalid_refresh_token_or_access_token";
     }
 }
