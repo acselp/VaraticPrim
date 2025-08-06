@@ -9,6 +9,7 @@ using VaraticPrim.Framework.Models.Token;
 
 namespace VaraticPrim.Api.Controllers.Auth;
 
+[AllowAnonymous]
 [Route("/auth")]
 public class AuthenticationController : ApiBaseController
 {
@@ -19,7 +20,6 @@ public class AuthenticationController : ApiBaseController
         _authenticationManager = authenticationManager;
     }
 
-    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
     {
@@ -34,7 +34,7 @@ public class AuthenticationController : ApiBaseController
         }
     }
 
-    [HttpPost("refresh-token")]
+    [HttpPost("refresh")]
     public async Task<IActionResult> LoginByRefreshToken([FromBody] LoginByRefreshTokenModel tokenModel)
     {
         try

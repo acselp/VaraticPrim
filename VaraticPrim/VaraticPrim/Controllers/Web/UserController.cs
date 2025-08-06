@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VaraticPrim.Domain.Exceptions;
 using VaraticPrim.Framework.Errors.FrontEndErrors;
@@ -23,6 +24,7 @@ public class UserController : BaseClientController
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Create([FromBody] CreateUserModel model)
     {
         try
