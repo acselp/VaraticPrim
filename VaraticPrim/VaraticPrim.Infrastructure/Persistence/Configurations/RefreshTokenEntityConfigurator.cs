@@ -10,7 +10,7 @@ public class RefreshTokenEntityConfigurator : IEntityTypeConfiguration<RefreshTo
     {
         builder.ToTable("refresh_token", "public");
 
-        builder.HasOne<UserEntity>(u => u.UserEntity)
+        builder.HasOne<UserEntity>(u => u.User)
                .WithMany()
                .HasForeignKey(u => u.UserId);
     }

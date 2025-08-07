@@ -108,6 +108,6 @@ public class AuthenticationManager
 
         if (entity == null || entity.IsExpired) throw new InvalidAccessTokenOrRefreshTokenException();
 
-        return entity.UserEntity ?? throw new InvalidAccessTokenOrRefreshTokenException();
+        return entity.User ?? throw new InvalidAccessTokenOrRefreshTokenException();
     }
 }
