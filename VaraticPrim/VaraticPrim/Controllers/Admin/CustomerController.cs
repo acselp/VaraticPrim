@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VaraticPrim.Domain.Exceptions;
 using VaraticPrim.Framework.Errors.FrontEndErrors;
@@ -16,7 +17,9 @@ public class CustomerController : BaseAdminController
         _customerManager = customerManager;
     }
 
-    public async Task<IActionResult> Create(CreateCustomerModel model)
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateCustomerModel model)
     {
         try
         {

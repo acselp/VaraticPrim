@@ -24,7 +24,7 @@ public class LocationManager
     {
         try
         {
-            var addressModel = _addressManager.Create(model.Address);
+            var addressModel = await _addressManager.Create(model.Address);
             var locationEntity = new LocationEntity
             {
                 AddressId = addressModel.Id

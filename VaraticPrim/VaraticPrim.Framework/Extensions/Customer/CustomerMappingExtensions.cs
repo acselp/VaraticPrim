@@ -11,6 +11,7 @@ public static class CustomerMappingExtensions
     {
         return new CustomerModel
         {
+            Id          = entity.Id,
             AccountNr   = entity.AccountNr,
             Location    = entity.Location.ToModel(),
             ContactInfo = entity.ContactInfo.ToModel()

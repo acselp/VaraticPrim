@@ -26,6 +26,7 @@ public static class AddressMappingExtensions
     {
         return new AddressModel
         {
+            Id          = entity.Id,
             Street      = entity.Street,
             HouseNr     = entity.HouseNr,
             Block       = entity.Block,

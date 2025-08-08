@@ -21,6 +21,7 @@ public static class CounterMappingExtensions
     {
         return new CounterModel
         {
+            Id           = entity.Id,
             LocationId   = entity.LocationId,
             ReadingValue = entity.ReadingValue,
             UsageType    = entity.UsageType,

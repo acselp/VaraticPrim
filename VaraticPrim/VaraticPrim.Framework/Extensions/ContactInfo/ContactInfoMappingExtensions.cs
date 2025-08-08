@@ -10,6 +10,7 @@ public static class ContactInfoMappingExtensions
     {
         return new ContactInfoModel
         {
+            Id        = entity.Id,
             Mobile    = entity.Mobile,
             Phone     = entity.Phone,
             FirstName = entity.FirstName,
