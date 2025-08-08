@@ -60,6 +60,19 @@ CREATE TABLE ${schema}.address
     updated_on_utc TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+CREATE TABLE ${schema}.location
+(
+    id             SERIAL PRIMARY KEY,
+
+    address_id     INTEGER     NOT NULL
+        REFERENCES ${schema}.address (id)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+
+    created_on_utc TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_on_utc TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 CREATE TABLE ${schema}.counter
 (
     id             SERIAL PRIMARY KEY,
@@ -69,19 +82,6 @@ CREATE TABLE ${schema}.counter
     usage_type     INTEGER     NOT NULL DEFAULT 0,
     location_id    INTEGER     NOT NULL
         REFERENCES ${schema}.location (id)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-
-    created_on_utc TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_on_utc TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-
-CREATE TABLE ${schema}.location
-(
-    id             SERIAL PRIMARY KEY,
-
-    address_id     INTEGER     NOT NULL
-        REFERENCES ${schema}.address (id)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION,
 
