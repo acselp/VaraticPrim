@@ -8,53 +8,64 @@ namespace VaraticPrim.Infrastructure.Repository;
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
     private readonly DbContext _context;
- 
+
     public GenericRepository(DbContext context)
     {
         _context = context;
     }
- 
-    public async Task<T?> GetById(int id)
-        => await _context.Set<T>().FindAsync(id);
- 
+
     public IQueryable<T> Table =>
         _context.Set<T>();
- 
-    public async Task<T?> Find(Expression<Func<T, bool>> predicate)
-        => await _context.Set<T>().FirstOrDefaultAsync(predicate);
- 
+
+    public async Task<T?> GetById(int id)
+    {
+        return await _context.Set<T>().FindAsync(id);
+    }
+
     public async Task<IEnumerable<T>> GetAll()
-        => await _context.Set<T>().ToListAsync();
- 
-    public async Task Insert(T entity)
+    {
+        return await _context.Set<T>().ToListAsync();
+    }
+
+    public async Task<T> Insert(T entity)
     {
         entity.CreatedOnUtc = DateTime.UtcNow;
         entity.UpdatedOnUtc = DateTime.UtcNow;
- 
+
         _context.Set<T>().Add(entity);
         await _context.SaveChangesAsync();
+
+        return entity;
     }
- 
-    public async Task InsertRange(IEnumerable<T> entities)
+
+    public async Task<IEnumerable<T>> InsertRange(IEnumerable<T> entities)
     {
-        _context.Set<T>().AddRange(entities);
+        var baseEntities = entities.ToList();
+        _context.Set<T>().AddRange(baseEntities);
         await _context.SaveChangesAsync();
+
+        return baseEntities;
     }
- 
-    public async Task Update(T entity)
+
+    public async Task<T> Update(T entity)
     {
         entity.UpdatedOnUtc = DateTime.UtcNow;
- 
+
         _context.Set<T>().Update(entity);
         await _context.SaveChangesAsync();
+
+        return entity;
     }
- 
-    public async Task UpdateRange(IEnumerable<T> entities)
+
+    public async Task<IEnumerable<T>> UpdateRange(IEnumerable<T> entities)
     {
-        _context.Set<T>().UpdateRange(entities);
+        var baseEntities = entities.ToList();
+        _context.Set<T>().UpdateRange(baseEntities);
         await _context.SaveChangesAsync();
+
+        return baseEntities;
     }
- 
+
     public async Task Delete(T entity)
     {
         _context.Set<T>().Remove(entity);
@@ -65,5 +76,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         _context.Set<T>().RemoveRange(entities);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<T?> Find(Expression<Func<T, bool>> predicate)
+    {
+        return await _context.Set<T>().FirstOrDefaultAsync(predicate);
     }
 }

@@ -16,47 +16,38 @@ public class AddressEntityConfigurator : IEntityTypeConfiguration<AddressEntity>
 
         builder
            .Property(x => x.Street)
-           .HasMaxLength(255)
-           .HasDefaultValue("");
+           .HasMaxLength(255);
 
         builder
            .Property(x => x.HouseNr)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
 
         builder
            .Property(x => x.Block)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
 
         builder
            .Property(x => x.Country)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
 
         builder
            .Property(x => x.District)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
 
         builder
            .Property(x => x.Entrance)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
 
         builder
            .Property(x => x.Locality)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
 
         builder
            .Property(x => x.ApartmentNr)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
 
         builder
            .Property(x => x.PostalCode)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
     }
 }

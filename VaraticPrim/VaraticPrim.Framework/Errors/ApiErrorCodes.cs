@@ -16,4 +16,9 @@ public static class ApiErrorCodes
         public const string WrongPasswordOrEmail             = "wrong_password_or_email";
         public const string InvalidRefreshTokenOrAccessToken = "invalid_refresh_token_or_access_token";
     }
+
+    public static class Customer
+    {
+        public const string CustomerAlreadyExists = "customer_already_exists";
+    }
 }

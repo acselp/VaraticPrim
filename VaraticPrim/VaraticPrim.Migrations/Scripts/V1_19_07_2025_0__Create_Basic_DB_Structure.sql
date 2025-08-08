@@ -2,13 +2,13 @@ CREATE TABLE ${schema}.contact_info
 (
     id             SERIAL PRIMARY KEY,
 
-    first_name     VARCHAR(100) NULL,
-    last_name      VARCHAR(100) NULL,
+    first_name     VARCHAR(100) NOT NULL,
+    last_name      VARCHAR(100) NOT NULL,
     phone          VARCHAR(50) NULL,
     mobile         VARCHAR(50) NULL,
 
-    created_on_utc TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_on_utc TIMESTAMPTZ NOT NULL DEFAULT now()
+    created_on_utc TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    updated_on_utc TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
 
 CREATE TABLE ${schema}.user
@@ -34,7 +34,7 @@ CREATE TABLE ${schema}.refresh_token
     refresh_token   VARCHAR(255) NOT NULL UNIQUE,
     user_id         INTEGER      NOT NULL
         REFERENCES ${schema}.user (id)
-            ON DELETE NO ACTIOn
+            ON DELETE NO ACTION
             ON UPDATE NO ACTION,
     expiration_time timestamp,
 
@@ -93,6 +93,7 @@ CREATE TABLE ${schema}.customer
 (
     id              SERIAL PRIMARY KEY,
 
+    account_nr      INTEGER     NOT NULL UNIQUE,
     contact_info_id INTEGER     NOT NULL
         REFERENCES ${schema}.contact_info (id)
             ON DELETE NO ACTION

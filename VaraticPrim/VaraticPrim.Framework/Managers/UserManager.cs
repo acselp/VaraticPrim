@@ -13,20 +13,20 @@ namespace VaraticPrim.Framework.Managers;
 [AllowAnonymous]
 public class UserManager
 {
-    private readonly UserCreateModelValidator _createModelValidator;
     private readonly HashHelper               _hashHelper;
     private readonly ILogger<UserManager>     _logger;
+    private readonly CreateUserModelValidator _modelValidator;
     private readonly UserMapper               _userMapper;
     private readonly IUserRepository          _userRepository;
 
-    public UserManager(IUserRepository          userRepository,       UserMapper userMapper, HashHelper hashHelper,
-                       UserCreateModelValidator createModelValidator, ILogger<UserManager> logger)
+    public UserManager(IUserRepository          userRepository, UserMapper           userMapper, HashHelper hashHelper,
+                       CreateUserModelValidator modelValidator, ILogger<UserManager> logger)
     {
-        _userRepository       = userRepository;
-        _userMapper           = userMapper;
-        _hashHelper           = hashHelper;
-        _createModelValidator = createModelValidator;
-        _logger               = logger;
+        _userRepository = userRepository;
+        _userMapper     = userMapper;
+        _hashHelper     = hashHelper;
+        _modelValidator = modelValidator;
+        _logger         = logger;
     }
 
     public async Task<IEnumerable<UserModel>> GetAll()
@@ -39,7 +39,7 @@ public class UserManager
         try
         {
             _logger.LogInformation("Creating user...");
-            await _createModelValidator.ValidateAndThrowAsync(model);
+            await _modelValidator.ValidateAndThrowAsync(model);
 
             if (await _userRepository.UserWithEmailExists(model.Email))
             {

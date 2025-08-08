@@ -14,6 +14,12 @@ public static class FrontEndErrors
         ErrorMessage = "Could not validate the model"
     };
 
+    public static Error CustomerAccountNrAlreadyExists { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Customer.CustomerAlreadyExists,
+        ErrorMessage = "Customer account number already exists"
+    };
+
     public static Error WrongPasswordOrEmailError { get; } = new()
     {
         ErrorCode    = ApiErrorCodes.Login.WrongPasswordOrEmail,

@@ -6,9 +6,9 @@ using VaraticPrim.Framework.Managers;
 using VaraticPrim.Framework.Models.User;
 using ValidationException = FluentValidation.ValidationException;
 
-namespace VaraticPrim.Api.Controllers.Web;
+namespace VaraticPrim.Api.Controllers.Admin;
 
-public class UserController : BaseClientController
+public class UserController : BaseAdminController
 {
     private readonly UserManager _userManager;
 

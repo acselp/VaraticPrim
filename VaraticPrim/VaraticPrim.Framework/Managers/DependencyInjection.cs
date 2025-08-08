@@ -8,5 +8,9 @@ public static class DependencyInjection
     {
         services.AddScoped<UserManager>();
         services.AddScoped<AuthenticationManager>();
+        services.AddScoped<AddressManager>();
+        services.AddScoped<LocationManager>();
+        services.AddScoped<ContactInfoManager>();
+        services.AddScoped<CustomerManager>();
     }
 }

@@ -16,22 +16,18 @@ public class ContactInfoEntityConfigurator : IEntityTypeConfiguration<ContactInf
 
         builder
            .Property(x => x.FirstName)
-           .HasMaxLength(100)
-           .HasDefaultValue("");
+           .HasMaxLength(100);
 
         builder
            .Property(x => x.LastName)
-           .HasMaxLength(100)
-           .HasDefaultValue("");
+           .HasMaxLength(100);
 
         builder
            .Property(x => x.Phone)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
 
         builder
            .Property(x => x.Mobile)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+           .HasMaxLength(50);
     }
 }

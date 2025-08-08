@@ -3,9 +3,9 @@ using VaraticPrim.Framework.Models.User;
 
 namespace VaraticPrim.Framework.Validators;
 
-public class UserCreateModelValidator : AbstractValidator<CreateUserModel>
+public class CreateUserModelValidator : AbstractValidator<CreateUserModel>
 {
-    public UserCreateModelValidator()
+    public CreateUserModelValidator()
     {
         RuleFor(x => x.Email)
            .NotEmpty().WithMessage("Email is required")
