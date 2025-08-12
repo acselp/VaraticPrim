@@ -1,12 +1,15 @@
 <template>
-  <ThemeProvider>
-    <SidebarProvider>
-      <RouterView />
-    </SidebarProvider>
-  </ThemeProvider>
+  <sidebar-provider>
+    <app-sidebar />
+    <main>
+      <sidebar-trigger />
+      Content
+    </main>
+  </sidebar-provider>
 </template>
 
-<script setup lang="ts">
-import ThemeProvider from './components/layout/ThemeProvider.vue'
-import SidebarProvider from './components/layout/SidebarProvider.vue'
+<script lang="ts" setup>
+
+import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
+import AppSidebar from "@/components/shared/app-sidebar/AppSidebar.vue";
 </script>

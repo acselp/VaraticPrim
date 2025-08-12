@@ -37,25 +37,20 @@ public class CustomerManager
 
             if (await _customerRepository.AccountNrExists(model.AccountNr))
                 throw new CustomerAccountNumberAlreadyExists("Account number already exists");
-            
+
             var customerEntity = new CustomerEntity
             {
-                AccountNr     = model.AccountNr,
+                AccountNr = model.AccountNr
             };
 
             await _customerRepository.Insert(customerEntity);
 
             var customerModel = customerEntity.ToModel();
-            
-            if (model.Location != null)
-            {
-                customerModel.Location = await _locationManager.Create(model.Location);
-            }
-            
+
+            if (model.Location != null) customerModel.Location = await _locationManager.Create(model.Location);
+
             if (model.ContactInfo != null)
-            {
                 customerModel.ContactInfo = await _contactInfoManager.Create(model.ContactInfo);
-            }
 
             return customerModel;
         }
