@@ -1,3 +1,13 @@
+CREATE TABLE ${schema}.customer
+(
+    id              SERIAL PRIMARY KEY,
+
+    account_nr      INTEGER     NOT NULL UNIQUE,
+
+    created_on_utc  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_on_utc  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 CREATE TABLE ${schema}.contact_info
 (
     id             SERIAL PRIMARY KEY,
@@ -6,6 +16,11 @@ CREATE TABLE ${schema}.contact_info
     last_name      VARCHAR(100) NOT NULL,
     phone          VARCHAR(50) NULL,
     mobile         VARCHAR(50) NULL,
+
+    customer_id     INTEGER     NOT NULL
+        REFERENCES ${schema}.customer (id)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
 
     created_on_utc TIMESTAMPTZ  NOT NULL DEFAULT now(),
     updated_on_utc TIMESTAMPTZ  NOT NULL DEFAULT now()
@@ -18,10 +33,6 @@ CREATE TABLE ${schema}.user
     email           VARCHAR(100) NOT NULL UNIQUE,
     password_hash   VARCHAR(255) NOT NULL,
     password_salt   VARCHAR(255) NOT NULL,
-    contact_info_id INTEGER      NOT NULL
-        REFERENCES ${schema}.contact_info (id)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
 
     created_on_utc  TIMESTAMPTZ  NOT NULL DEFAULT now(),
     updated_on_utc  TIMESTAMPTZ  NOT NULL DEFAULT now()
@@ -42,6 +53,20 @@ CREATE TABLE ${schema}.refresh_token
     updated_on_utc  TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
 
+CREATE TABLE ${schema}.location
+(
+    id             SERIAL PRIMARY KEY,
+
+    customer_id     INTEGER     NOT NULL
+        REFERENCES ${schema}.customer (id)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+
+    created_on_utc TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_on_utc TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+
 CREATE TABLE ${schema}.address
 (
     id             SERIAL PRIMARY KEY,
@@ -56,16 +81,8 @@ CREATE TABLE ${schema}.address
     postal_code    VARCHAR(50) NULL,
     country        VARCHAR(50) NULL,
 
-    created_on_utc TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_on_utc TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-
-CREATE TABLE ${schema}.location
-(
-    id             SERIAL PRIMARY KEY,
-
-    address_id     INTEGER     NOT NULL
-        REFERENCES ${schema}.address (id)
+    location_id     INTEGER     NOT NULL
+        REFERENCES ${schema}.location (id)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION,
 
@@ -87,23 +104,4 @@ CREATE TABLE ${schema}.counter
 
     created_on_utc TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_on_utc TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-
-CREATE TABLE ${schema}.customer
-(
-    id              SERIAL PRIMARY KEY,
-
-    account_nr      INTEGER     NOT NULL UNIQUE,
-    contact_info_id INTEGER     NOT NULL
-        REFERENCES ${schema}.contact_info (id)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-
-    location_id     INTEGER     NOT NULL
-        REFERENCES ${schema}.location (id)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-
-    created_on_utc  TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_on_utc  TIMESTAMPTZ NOT NULL DEFAULT now()
 );

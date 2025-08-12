@@ -10,10 +10,6 @@ public class ContactInfoEntityConfigurator : IEntityTypeConfiguration<ContactInf
     {
         builder.ToTable("contact_info", "public");
 
-        builder.HasOne<CustomerEntity>(x => x.Customer)
-               .WithOne(x => x.ContactInfo)
-               .HasForeignKey<CustomerEntity>(x => x.Id);
-
         builder
            .Property(x => x.FirstName)
            .HasMaxLength(100);

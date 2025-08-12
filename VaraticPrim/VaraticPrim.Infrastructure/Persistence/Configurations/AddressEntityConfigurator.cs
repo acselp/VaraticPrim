@@ -9,11 +9,7 @@ public class AddressEntityConfigurator : IEntityTypeConfiguration<AddressEntity>
     public void Configure(EntityTypeBuilder<AddressEntity> builder)
     {
         builder.ToTable("address", "public");
-
-        builder.HasOne<LocationEntity>(x => x.Location)
-               .WithOne(x => x.Address)
-               .HasForeignKey<LocationEntity>(x => x.Id);
-
+        
         builder
            .Property(x => x.Street)
            .HasMaxLength(255);

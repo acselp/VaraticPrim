@@ -12,10 +12,10 @@ public class LocationEntityConfigurator : IEntityTypeConfiguration<LocationEntit
 
         builder.HasOne<AddressEntity>(x => x.Address)
                .WithOne(x => x.Location)
-               .HasForeignKey<LocationEntity>(x => x.Id);
-
-        builder.HasOne<CustomerEntity>(x => x.Customer)
-               .WithOne(x => x.Location)
-               .HasForeignKey<LocationEntity>(x => x.Id);
+               .HasForeignKey<AddressEntity>(x => x.LocationId);
+        
+        builder.HasMany(x => x.CounterList)
+            .WithOne(x => x.Location)
+            .HasForeignKey(x => x.LocationId);
     }
 }

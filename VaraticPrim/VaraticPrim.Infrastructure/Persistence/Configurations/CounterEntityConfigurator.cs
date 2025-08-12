@@ -10,14 +10,9 @@ public class CounterEntityConfigurator : IEntityTypeConfiguration<CounterEntity>
     {
         builder.ToTable("counter", "public");
 
-        builder.HasOne<LocationEntity>(x => x.Location)
-               .WithMany(x => x.CounterList)
-               .HasForeignKey(x => x.LocationId);
-
         builder
-           .Property(x => x.Barcode)
-           .HasMaxLength(50)
-           .HasDefaultValue("");
+            .Property(x => x.Barcode)
+            .HasMaxLength(50);
 
         builder
            .Property(x => x.ReadingValue)

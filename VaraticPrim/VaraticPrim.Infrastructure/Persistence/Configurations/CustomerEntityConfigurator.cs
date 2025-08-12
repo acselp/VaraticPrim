@@ -12,6 +12,10 @@ public class CustomerEntityConfigurator : IEntityTypeConfiguration<CustomerEntit
 
         builder.HasOne<LocationEntity>(x => x.Location)
                .WithOne(x => x.Customer)
-               .HasForeignKey<CustomerEntity>(x => x.Id);
+               .HasForeignKey<LocationEntity>(x => x.CustomerId);
+        
+        builder.HasOne<ContactInfoEntity>(x => x.ContactInfo)
+            .WithOne(x => x.Customer)
+            .HasForeignKey<ContactInfoEntity>(x => x.CustomerId);
     }
 }
