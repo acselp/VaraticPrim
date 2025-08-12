@@ -1,3 +1,5 @@
+using System.Security.AccessControl;
+
 namespace VaraticPrim.Framework.Models.Address;
 
 public class CreateAddressModel
@@ -11,4 +13,6 @@ public class CreateAddressModel
     public string? District    { get; set; }
     public string? PostalCode  { get; set; }
     public string? Country     { get; set; }
+
+    public int LocationId { get; set; }
 }

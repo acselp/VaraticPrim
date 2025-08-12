@@ -4,5 +4,6 @@ namespace VaraticPrim.Framework.Models.Location;
 
 public class CreateLocationModel
 {
-    public CreateAddressModel Address { get; set; }
+    public int CustomerId { get; set; }
+    public CreateAddressModel? Address { get; set; }
 }

@@ -44,8 +44,20 @@ public class CustomerManager
             };
 
             await _customerRepository.Insert(customerEntity);
+
+            var customerModel = customerEntity.ToModel();
             
-            return customerEntity.ToModel();
+            if (model.Location != null)
+            {
+                customerModel.Location = await _locationManager.Create(model.Location);
+            }
+            
+            if (model.ContactInfo != null)
+            {
+                customerModel.ContactInfo = await _contactInfoManager.Create(model.ContactInfo);
+            }
+
+            return customerModel;
         }
         catch (Exception ex)
         {

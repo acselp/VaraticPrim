@@ -24,12 +24,14 @@ public class LocationManager
     {
         try
         {
-            var addressModel = await _addressManager.Create(model.Address);
             var locationEntity = new LocationEntity
             {
-                AddressId = addressModel.Id
+                CustomerId = model.CustomerId
             };
-            return (await _locationRepository.Insert(locationEntity)).ToModel();
+
+            await _locationRepository.Insert(locationEntity);
+            
+            return locationEntity.ToModel();
         }
         catch (Exception ex)
         {

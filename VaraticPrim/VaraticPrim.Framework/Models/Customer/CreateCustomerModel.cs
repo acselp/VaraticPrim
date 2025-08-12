@@ -6,6 +6,6 @@ namespace VaraticPrim.Framework.Models.Customer;
 public class CreateCustomerModel
 {
     public int                    AccountNr   { get; set; }
-    public CreateContactInfoModel ContactInfo { get; set; }
-    public CreateLocationModel    Location    { get; set; }
+    public CreateContactInfoModel? ContactInfo { get; set; }
+    public CreateLocationModel?    Location    { get; set; }
 }

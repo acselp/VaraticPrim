@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using VaraticPrim.Application.Repository;
+using VaraticPrim.Domain.Entities;
 using VaraticPrim.Framework.Extensions.ContactInfo;
 using VaraticPrim.Framework.Models.ContactInfo;
 using VaraticPrim.Framework.Validators;
@@ -26,7 +27,19 @@ public class ContactInfoManager
         try
         {
             await _contactInfoModelValidator.ValidateAndThrowAsync(model);
-            return (await _contactInfoRepository.Insert(model.ToEntity())).ToModel();
+
+            var contactInfoEntity = new ContactInfoEntity
+            {
+                CustomerId = model.CustomerId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Mobile = model.Mobile,
+                Phone = model.Phone
+            };
+
+            await _contactInfoRepository.Insert(contactInfoEntity);
+            
+            return contactInfoEntity.ToModel();
         }
         catch (Exception ex)
         {

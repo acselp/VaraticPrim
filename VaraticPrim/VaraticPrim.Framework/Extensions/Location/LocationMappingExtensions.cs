@@ -13,8 +13,9 @@ public static class LocationMappingExtensions
         return new LocationModel
         {
             Id          = entity.Id,
+            CustomerId  = entity.CustomerId,
             Customer    = entity.Customer.ToModel(),
-            Address     = entity.Address.ToModel(),
+            Address     = entity.Address?.ToModel(),
             CounterList = entity.CounterList.Select(x => x.ToModel())
         };
     }

@@ -2,7 +2,6 @@ namespace VaraticPrim.Domain.Entities;
 
 public class LocationEntity : BaseEntity
 {
-    public         int                        AddressId   { get; set; }
     public         int               CustomerId    { get; set; }
     public virtual AddressEntity?              Address     { get; set; }
     public virtual CustomerEntity             Customer    { get; set; }
