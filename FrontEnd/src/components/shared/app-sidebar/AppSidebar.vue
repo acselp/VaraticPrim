@@ -35,5 +35,10 @@ import {
   SidebarGroup,
   SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {appSidebarItems} from "@/components/shared/app-sidebar/constants.ts";
+import {getAppSidebarItems} from "@/components/shared/app-sidebar/constants.ts";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+
+const appSidebarItems = getAppSidebarItems(router);
 </script>
