@@ -17,8 +17,8 @@
             <sidebar-menu-item v-for="item in appSidebarItems" :key="item.title">
               <sidebar-menu-button asChild @click="item.click">
                 <a>
-                  <component :is="item.icon" />
-                  <span>{{item.title}}</span>
+                  <component :is="item.icon"/>
+                  <span>{{ item.title }}</span>
                 </a>
               </sidebar-menu-button>
             </sidebar-menu-item>
@@ -28,6 +28,7 @@
     </sidebar-content>
   </sidebar>
 </template>
+
 <script lang="ts" setup>
 import {
   Sidebar,

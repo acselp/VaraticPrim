@@ -1,9 +1,11 @@
+using FluentValidation;
 using Microsoft.Extensions.Logging;
 using VaraticPrim.Application.Repository;
 using VaraticPrim.Domain.Entities;
 using VaraticPrim.Domain.Exceptions;
 using VaraticPrim.Framework.Helpers;
 using VaraticPrim.Framework.Models.Auth;
+using VaraticPrim.Framework.Validators;
 
 namespace VaraticPrim.Framework.Managers;
 
@@ -11,19 +13,21 @@ public class AuthenticationManager
 {
     private readonly HashHelper                     _hashHelper;
     private readonly ILogger<AuthenticationManager> _logger;
+    private readonly LoginModelValidator            _loginModelValidator;
     private readonly IRefreshTokenRepository        _refreshTokenRepository;
     private readonly TokenGeneratorHelper           _tokenGeneratorHelper;
     private readonly IUserRepository                _userRepository;
 
 
     public AuthenticationManager(
-        TokenGeneratorHelper           tokenGeneratorHelper,
-        IUserRepository                userRepository,
+        TokenGeneratorHelper tokenGeneratorHelper,
+        IUserRepository userRepository,
         ILogger<AuthenticationManager> logger,
-        HashHelper                     hashHelper, IRefreshTokenRepository refreshTokenRepository)
+        HashHelper hashHelper, IRefreshTokenRepository refreshTokenRepository, LoginModelValidator loginModelValidator)
     {
         _hashHelper             = hashHelper;
         _refreshTokenRepository = refreshTokenRepository;
+        _loginModelValidator    = loginModelValidator;
         _tokenGeneratorHelper   = tokenGeneratorHelper;
         _userRepository         = userRepository;
         _logger                 = logger;
@@ -34,6 +38,9 @@ public class AuthenticationManager
         try
         {
             _logger.LogInformation("Start authenticating user");
+
+            await _loginModelValidator.ValidateAndThrowAsync(loginModel);
+
             var currentUser = await _userRepository.GetByEmail(loginModel.Email);
 
             if (currentUser == null || !_hashHelper.PasswordHashMatches(currentUser.PasswordHash,

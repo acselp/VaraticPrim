@@ -1,5 +1,5 @@
 <template>
-  <auth-layout>
+  <AuthLayout>
     <template #header-buttons>
       <a
           href="/login"
@@ -20,6 +20,7 @@
             <FormControl>
               <Input type="text" placeholder="Email..." v-bind="componentField"/>
             </FormControl>
+            <FormDescription/>
             <FormMessage/>
           </FormItem>
         </FormField>
@@ -29,32 +30,40 @@
             <FormControl>
               <Input type="password" placeholder="Password..." v-bind="componentField"/>
             </FormControl>
+            <FormDescription/>
             <FormMessage/>
           </FormItem>
         </FormField>
-        <form-field label="Password" name="password">
-          <form-item>
-            <form-control>
+        <FormField label="submit" name="submit">
+          <FormItem>
+            <FormControl>
               <Button type="submit">
                 Login
               </Button>
-            </form-control>
-          </form-item>
-        </form-field>
+            </FormControl>
+          </FormItem>
+        </FormField>
       </form>
     </template>
-  </auth-layout>
+  </AuthLayout>
 </template>
+
 <script setup lang="ts">
 import AuthLayout from "@/layouts/AuthLayout.vue";
 import {Button, buttonVariants} from "@/components/ui/button";
-import {cn} from "@/lib/utils.ts";
 import {FormControl, FormItem, FormLabel, FormField, FormMessage, FormDescription} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {useForm} from "vee-validate";
 import {toTypedSchema} from "@vee-validate/zod";
 import {z} from "zod";
+import {cn} from "@/lib/utils.ts";
+import {AuthService} from "@/services/authService.ts";
+import {useAuthStore} from "@/stores/authStore.ts";
+import {useRouter} from "vue-router";
+import {RouterPaths} from "@/router/routerPaths.ts";
 
+const authStore = useAuthStore();
+const router = useRouter();
 
 let formSchema: any;
 formSchema = toTypedSchema(z.object({
@@ -67,7 +76,11 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit((values) => {
-  console.log('Form submitted!', values)
+  AuthService.login({Email: values.email, Password: values.password})
+      .then((res) => {
+        authStore.login(res.data);
+        router.push(RouterPaths.Dashboard);
+      })
 })
 
 </script>

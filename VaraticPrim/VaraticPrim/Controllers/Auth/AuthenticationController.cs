@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VaraticPrim.Api.Controllers.Shared;
@@ -27,6 +28,10 @@ public class AuthenticationController : ApiBaseController
         {
             var model = await _authenticationManager.Login(loginModel);
             return Ok(model);
+        }
+        catch (ValidationException e)
+        {
+            return ValidationError(e);
         }
         catch (WrongPasswordOrEmailException e)
         {

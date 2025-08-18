@@ -19,6 +19,7 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UseCors("AllowFrontendCorsPolicy");
         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
         app.UseRouting();
         app.UseAuthentication();

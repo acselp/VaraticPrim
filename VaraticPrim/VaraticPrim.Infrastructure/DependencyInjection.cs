@@ -29,6 +29,17 @@ public static class DependencyInjection
         services.AddJwt(configuration);
         services.AddAuthorization();
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowFrontendCorsPolicy",
+                              policy =>
+                              {
+                                  policy.WithOrigins(configuration["Frontend:BaseUrl"])
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                              });
+        });
+
         services.AddOptions(configuration);
         services.AddOptions();
         services.AddMigrations(configuration);
@@ -41,5 +52,6 @@ public static class DependencyInjection
     {
         services.Configure<DbConnectionStringOptions>(configuration.GetSection(DbConnectionStringOptions.SectionName));
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+        services.Configure<FrontendOptions>(configuration.GetSection(FrontendOptions.SectionName));
     }
 }

@@ -11,5 +11,6 @@ public static class DependencyInjection
         services.AddValidatorsFromAssemblyContaining<CreateAddressModelValidator>();
         services.AddValidatorsFromAssemblyContaining<CreateContactInfoModelValidator>();
         services.AddValidatorsFromAssemblyContaining<CreateCustomerModelValidator>();
+        services.AddValidatorsFromAssemblyContaining<LoginModelValidator>();
     }
 }
