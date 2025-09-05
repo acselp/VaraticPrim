@@ -3,7 +3,7 @@
     <AppSidebar/>
     <main class="w-full">
       <AdminHeader/>
-      <slot/>
+      <router-view/>
     </main>
   </SidebarProvider>
 </template>
