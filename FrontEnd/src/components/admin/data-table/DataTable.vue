@@ -34,7 +34,7 @@
               <Loading class="mx-auto"/>
             </TableCell>
           </TableRow>
-          <TableRow v-else>
+          <TableRow v-else-if="!table.getRowModel().rows?.length">
             <TableCell
                 :colspan="columns.length"
                 class="h-24 text-center"
@@ -102,7 +102,7 @@ import {
 import Loading from "@/components/shared/loading/Loading.vue";
 
 const props = defineProps({
-  columns: Array as PropType<ColumnDef<any>[]>,
+  columns: Array,
   tableData: Array,
   loading: Boolean,
 })
@@ -110,8 +110,10 @@ const props = defineProps({
 const expanded = ref<ExpandedState>({})
 
 const table = useVueTable({
-  data: props.tableData,
   columns: props.columns,
+  get data() {
+    return props.tableData as any[]
+  },
   getCoreRowModel: getCoreRowModel(),
   getPaginationRowModel: getPaginationRowModel(),
   getSortedRowModel: getSortedRowModel(),

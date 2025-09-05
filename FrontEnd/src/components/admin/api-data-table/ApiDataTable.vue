@@ -22,7 +22,7 @@ const tableData = ref([])
 const isLoading = ref(false)
 
 const onFetchDataSuccess = (res) => {
-  tableData.value = res.data;
+  tableData.value = [...res.data];
 }
 
 const onFetchDataFailure = (err) => {

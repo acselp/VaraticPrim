@@ -47,6 +47,9 @@ public class CustomerManager
 
             var customerModel = customerEntity.ToModel();
 
+            if (model.ContactInfo != null) model.ContactInfo.CustomerId = customerModel.Id;
+            if (model.Location    != null) model.Location.CustomerId    = customerModel.Id;
+
             if (model.Location != null) customerModel.Location = await _locationManager.Create(model.Location);
 
             if (model.ContactInfo != null)
@@ -59,5 +62,10 @@ public class CustomerManager
             _logger.LogError(ex, "Could not create customer.");
             throw;
         }
+    }
+
+    public async Task<List<CustomerGridModel>> GridGetAll()
+    {
+        return (await _customerRepository.GetAll()).Select(entity => entity.ToGridModel()).ToList();
     }
 }

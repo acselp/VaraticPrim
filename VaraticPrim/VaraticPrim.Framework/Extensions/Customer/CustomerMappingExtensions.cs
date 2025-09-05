@@ -17,4 +17,16 @@ public static class CustomerMappingExtensions
             ContactInfo = entity.ContactInfo?.ToModel()
         };
     }
+
+    public static CustomerGridModel ToGridModel(this CustomerEntity entity)
+    {
+        return new CustomerGridModel
+        {
+            Id        = entity.Id,
+            FirstName = entity.ContactInfo?.FirstName ?? string.Empty,
+            LastName  = entity.ContactInfo?.LastName  ?? string.Empty,
+            Mobile    = entity.ContactInfo?.Mobile    ?? string.Empty,
+            Phone     = entity.ContactInfo?.Phone     ?? string.Empty
+        };
+    }
 }

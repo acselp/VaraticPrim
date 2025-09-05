@@ -1,5 +1,4 @@
 using VaraticPrim.Domain.Entities;
-using VaraticPrim.Framework.Extensions.Customer;
 using VaraticPrim.Framework.Models.ContactInfo;
 
 namespace VaraticPrim.Framework.Extensions.ContactInfo;
@@ -14,9 +13,9 @@ public static class ContactInfoMappingExtensions
             Mobile    = entity.Mobile,
             Phone     = entity.Phone,
             FirstName = entity.FirstName,
-            LastName  = entity.LastName,
+            LastName  = entity.LastName
 
-            Customer = entity.Customer.ToModel()
+            // Customer = entity.Customer.ToModel()
         };
     }
 

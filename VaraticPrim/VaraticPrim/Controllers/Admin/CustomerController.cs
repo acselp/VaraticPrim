@@ -34,4 +34,11 @@ public class CustomerController : BaseAdminController
             return BadRequest(FrontEndErrors.CustomerAccountNrAlreadyExists);
         }
     }
+
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<IActionResult> GridGetAll()
+    {
+        return Ok(await _customerManager.GridGetAll());
+    }
 }

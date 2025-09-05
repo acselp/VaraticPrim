@@ -105,25 +105,3 @@ CREATE TABLE ${schema}.counter
     created_on_utc TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_on_utc TIMESTAMPTZ NOT NULL DEFAULT now()
 );
-
-CREATE TABLE ${schema}.role
-(
-    id          SERIAL PRIMARY KEY,
-
-    name        VARCHAR(100) NOT NULL,
-    customer_id INTEGER      NOT NULL UNIQUE
-        REFERENCES ${schema}.customer (id)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
-)
-
-CREATE TABLE ${schema}.customer_role_mapping
-(
-    id        SERIAL PRIMARY KEY,
-
-    policy_id INTEGER NOT NULL,
-    role_id   INTEGER NOT NULL
-        REFERENCES ${schema}.role (id)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
-)

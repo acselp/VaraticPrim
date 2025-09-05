@@ -1,6 +1,6 @@
 const BASE_URL = "/Customer/"
 
-const getAllEndpoint = "GetAll"
+const getAllEndpoint = "GridGetAll"
 
 const getFullUrl = (endpoint: string) => `${BASE_URL}${endpoint}`;
 
