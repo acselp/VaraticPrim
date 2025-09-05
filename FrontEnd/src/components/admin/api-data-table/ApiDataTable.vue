@@ -2,6 +2,7 @@
   <data-table
       :columns="columns"
       :table-data="tableData"
+      :loading="isLoading"
   />
 </template>
 
@@ -18,6 +19,7 @@ const props = defineProps({
 })
 
 const tableData = ref([])
+const isLoading = ref(false)
 
 const onFetchDataSuccess = (res) => {
   tableData.value = res.data;
@@ -28,12 +30,16 @@ const onFetchDataFailure = (err) => {
 }
 
 const fetchData = () => {
+  isLoading.value = true;
   apiClient.post(props.apiUrl)
       .then((res) => {
         onFetchDataSuccess(res)
       })
       .catch((err) => {
         onFetchDataFailure(err)
+      })
+      .finally(() => {
+        isLoading.value = false;
       })
 }
 

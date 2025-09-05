@@ -26,6 +26,14 @@
             </template>
           </template>
 
+          <TableRow v-else-if="loading">
+            <TableCell
+                :colspan="columns.length"
+                class="h-24"
+            >
+              <Loading class="mx-auto"/>
+            </TableCell>
+          </TableRow>
           <TableRow v-else>
             <TableCell
                 :colspan="columns.length"
@@ -81,15 +89,8 @@ import {
   getSortedRowModel,
   useVueTable,
 } from "@tanstack/vue-table"
-import {ChevronDown} from "lucide-vue-next"
 import {type PropType, ref} from "vue"
 
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import {
   Table,
   TableBody,
@@ -98,10 +99,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import Loading from "@/components/shared/loading/Loading.vue";
 
 const props = defineProps({
   columns: Array as PropType<ColumnDef<any>[]>,
   tableData: Array,
+  loading: Boolean,
 })
 
 const expanded = ref<ExpandedState>({})
