@@ -13,6 +13,7 @@ public static class CustomerMappingExtensions
         {
             Id          = entity.Id,
             AccountNr   = entity.AccountNr,
+            Deleted     = entity.Deleted,
             Location    = entity.Location?.ToModel(),
             ContactInfo = entity.ContactInfo?.ToModel()
         };
@@ -23,6 +24,8 @@ public static class CustomerMappingExtensions
         return new CustomerGridModel
         {
             Id        = entity.Id,
+            AccountNr = entity.AccountNr,
+            Deleted   = entity.Deleted,
             FirstName = entity.ContactInfo?.FirstName ?? string.Empty,
             LastName  = entity.ContactInfo?.LastName  ?? string.Empty,
             Mobile    = entity.ContactInfo?.Mobile    ?? string.Empty,

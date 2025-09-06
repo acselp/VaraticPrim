@@ -12,4 +12,9 @@ public class CustomerRepository(PostgresDbContext context)
     {
         return await Table.AnyAsync(x => x.AccountNr == accountNr);
     }
+
+    public async Task<List<CustomerEntity>> GetAllFiltered()
+    {
+        return await Table.ToPagedAsync(filter.PageIndex, filter.PageSize);
+    }
 }
