@@ -28,7 +28,7 @@
 
           <TableRow v-else-if="loading">
             <TableCell
-                :colspan="columns.length"
+                :colspan="schema.columnConfig.columnList.length"
                 class="h-24"
             >
               <Loading class="mx-auto"/>
@@ -36,7 +36,7 @@
           </TableRow>
           <TableRow v-else-if="!table.getRowModel().rows?.length">
             <TableCell
-                :colspan="columns.length"
+                :colspan="schema.columnConfig.columnList.length"
                 class="h-24 text-center"
             >
               No results.
@@ -77,7 +77,6 @@
 
 import {Button} from "@/components/ui/button";
 import type {
-  ColumnDef,
   ExpandedState,
 } from "@tanstack/vue-table"
 import {
@@ -100,9 +99,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Loading from "@/components/shared/loading/Loading.vue";
+import type {ITableSchema} from "@/components/admin/data-table/types.ts";
 
 const props = defineProps({
-  columns: Array,
+  schema: Object as PropType<ITableSchema<any>>,
   tableData: Array,
   loading: Boolean,
 })
@@ -110,7 +110,7 @@ const props = defineProps({
 const expanded = ref<ExpandedState>({})
 
 const table = useVueTable({
-  columns: props.columns,
+  columns: props.schema.columnConfig.columnList,
   get data() {
     return props.tableData as any[]
   },

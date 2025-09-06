@@ -12,7 +12,7 @@ export const getAppSidebarItems = (router: Router) => {
         {
             title: "Customer",
             icon: User,
-            click: () => router.push(RouterPaths.Customer),
+            click: () => router.push(RouterPaths.CustomerGrid),
         }
     ];
 }

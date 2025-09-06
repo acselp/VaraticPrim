@@ -1,6 +1,6 @@
 <template>
   <data-table
-      :columns="columns"
+      :schema="schema"
       :table-data="tableData"
       :loading="isLoading"
   />
@@ -10,11 +10,11 @@
 
 import DataTable from "@/components/admin/data-table/DataTable.vue";
 import {onMounted, type PropType, ref} from "vue";
-import type {ColumnDef} from "@tanstack/vue-table";
 import {apiClient} from "@/api-client/apiClient.ts";
+import type {ITableSchema} from "@/components/admin/data-table/types.ts";
 
 const props = defineProps({
-  columns: Array as PropType<ColumnDef<any>[]>,
+  schema: Object as PropType<ITableSchema<any>>,
   apiUrl: String,
 })
 

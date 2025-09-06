@@ -1,5 +1,6 @@
 export enum RouterPaths {
     Dashboard = "/admin",
-    Customer = "/admin/customer",
+    CustomerGrid = "/admin/customer",
+    CustomerEdit = "/admin/customer/:id",
     Login = "/login",
 }
