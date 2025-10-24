@@ -1,8 +1,13 @@
 <template>
   <div class="p-6 relative">
-    <page-title>
-      {{ props.pageTitle }}
-    </page-title>
+    <div class="flex justify-between">
+      <page-title>
+        {{ props.pageTitle }}
+      </page-title>
+      <div class="page-actions">
+        <slot name="page-actions"/>
+      </div>
+    </div>
     <slot/>
   </div>
 </template>

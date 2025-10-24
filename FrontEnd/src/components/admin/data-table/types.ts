@@ -1,4 +1,4 @@
-import type {ColumnDef} from "@tanstack/vue-table";
+import type { ColumnDef } from "@tanstack/vue-table";
 
 export interface ITableSchema<T> {
     columnConfig: IColumnsConfig<T>;
@@ -17,12 +17,14 @@ export interface ITableRowActions<T> {
     actions: ITableAction<T>[];
 }
 
-export type TableActionCb<T> = (string | (data: ITableCbData<T>) => any);
+export type TableActionCb<T> = (data: ITableCbData<T>) => any;
+
+export type TableActionValue<T> = (string | TableActionCb<T>);
 
 export interface ITableAction<T> {
     action: TableActionCb<T>;
-    buttonSlot: TableActionCb<T>;
-    class: TableActionCb<T>;
+    buttonSlot: TableActionValue<T>;
+    class: TableActionValue<T>;
 }
 
 export interface ITableCbData<T> {

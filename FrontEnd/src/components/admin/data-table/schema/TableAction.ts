@@ -1,7 +1,7 @@
-import type {ITableAction, TableActionCb} from "@/components/admin/data-table/types.ts";
+import type { ITableAction, TableActionValue } from "@/components/admin/data-table/types.ts";
 
 export class TableAction<T> implements ITableAction<T> {
-    action: TableActionCb<T>;
-    buttonSlot: TableActionCb<T>;
-    class: TableActionCb<T>;
+    action: TableActionValue<T>;
+    buttonSlot: TableActionValue<T>;
+    class: TableActionValue<T>;
 }

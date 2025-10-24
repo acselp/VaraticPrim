@@ -8,19 +8,28 @@
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header"
                           :props="header.getContext()"/>
             </TableHead>
+
+            <TableHead class="w-1 whitespace-nowrap">
+              Actions
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <template v-if="table.getRowModel().rows?.length">
-            <template v-for="row in table.getRowModel().rows" :key="row.id">
-              <TableRow :data-state="row.getIsSelected() && 'selected'">
+          <template v-if="internalTableData?.length">
+            <template v-for="row in internalTableData" :key="row.id">
+              <TableRow>
                 <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
                   <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()"/>
                 </TableCell>
-              </TableRow>
-              <TableRow v-if="row.getIsExpanded()">
-                <TableCell :colspan="row.getAllCells().length">
-                  {{ JSON.stringify(row.original) }}
+
+                <TableCell>
+                  <div class="flex space-x-1">
+                    <Button v-for="action in schema.actionConfig.rowActions.actions"
+                            :class="getCbProperty(action.class, { row, tableData: internalTableData })"
+                            @click="action.action({ row, tableData: internalTableData })">
+                      {{ getCbProperty(action.buttonSlot, { row, tableData: internalTableData }) }}
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             </template>
@@ -34,7 +43,7 @@
               <Loading class="mx-auto"/>
             </TableCell>
           </TableRow>
-          <TableRow v-else-if="!table.getRowModel().rows?.length">
+          <TableRow v-else-if="!internalTableData?.length">
             <TableCell
                 :colspan="schema.columnConfig.columnList.length"
                 class="h-24 text-center"
@@ -75,7 +84,7 @@
 
 <script setup lang="ts">
 
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import type {
   ExpandedState,
 } from "@tanstack/vue-table"
@@ -88,7 +97,7 @@ import {
   getSortedRowModel,
   useVueTable,
 } from "@tanstack/vue-table"
-import {type PropType, ref} from "vue"
+import { computed, type PropType, ref } from "vue"
 
 import {
   Table,
@@ -99,7 +108,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Loading from "@/components/shared/loading/Loading.vue";
-import type {ITableSchema} from "@/components/admin/data-table/types.ts";
+import type { ITableCbData, ITableSchema, TableActionValue } from "@/components/admin/data-table/types.ts";
 
 const props = defineProps({
   schema: Object as PropType<ITableSchema<any>>,
@@ -125,5 +134,13 @@ const table = useVueTable({
     },
   },
 })
+
+const internalTableData = computed(() => {
+  return table.getRowModel().rows;
+})
+
+const getCbProperty = (action: TableActionValue<any>, data: ITableCbData<any>) => {
+  return !!action ? (typeof action === 'string' ? action : action(data)) : ''
+}
 
 </script>
