@@ -42,6 +42,11 @@ const getColumns = () => {
                 .WithHeader("Id")
             )
             .AddColumn((builder) => builder
+                .WithCell(({ row }) => row.getValue("AccountNr"))
+                .WithAccessorKey("AccountNr")
+                .WithHeader("AccountNr")
+            )
+            .AddColumn((builder) => builder
                 .WithCell(({ row }) => row.getValue("FirstName"))
                 .WithAccessorKey("FirstName")
                 .WithHeader("FirstName")
