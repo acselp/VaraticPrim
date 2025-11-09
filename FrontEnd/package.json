@@ -7,10 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.14.0",
+    "@vueuse/core": "^14.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.553.0",
@@ -22,6 +24,10 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
-    "shadcn-nuxt": "^2.3.2"
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "shadcn-nuxt": "^2.3.2",
+    "typescript": "^5.9.3"
   }
 }
