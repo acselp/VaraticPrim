@@ -1,4 +1,9 @@
 <template>
-  <slot />
+  <SidebarProvider>
+    <AdminSidebar />
+    <main>
+      <SidebarTrigger />
+      <slot />
+    </main>
+  </SidebarProvider>
 </template>
-<script setup lang="ts"></script>

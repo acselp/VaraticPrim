@@ -1,7 +1,4 @@
-<template>
-  <Sidebar>Side bar</Sidebar>
-  Admin index
-</template>
+<template>Admin index</template>
 
 <script lang="ts" setup>
 definePageMeta({

@@ -8,11 +8,11 @@ export default defineNuxtConfig({
     /**
      * Prefix for all the imported component
      */
-    prefix: "vp",
+    prefix: "",
     /**
      * Directory that the component lives in.
      * @default "./app/components/ui"
      */
-    componentDir: "~/app/components/ui",
+    componentDir: "./app/components/ui",
   },
 });
