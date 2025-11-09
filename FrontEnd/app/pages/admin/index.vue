@@ -1,5 +1,5 @@
 <template>
-          <Sidebar>Side bar</Sidebar>
+            <Sidebar>Side bar</Sidebar>
   Admin index
 </template>
 
