@@ -6,7 +6,7 @@ import { Primitive } from "reka-ui";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from ".";
 
-interface Props extends PrimitiveProps {
+interface Props {
   variant?: ButtonVariants["variant"];
   size?: ButtonVariants["size"];
   class?: HTMLAttributes["class"];
@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <Primitive
+    class="cursor-pointer"
     data-slot="button"
     :as="as"
     :as-child="asChild"
