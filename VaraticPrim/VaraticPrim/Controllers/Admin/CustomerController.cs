@@ -18,7 +18,7 @@ public class CustomerController : BaseAdminController
     }
 
     [AllowAnonymous]
-    [HttpPost]
+    [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] CreateCustomerModel model)
     {
         try
@@ -34,11 +34,11 @@ public class CustomerController : BaseAdminController
             return BadRequest(FrontEndErrors.CustomerAccountNrAlreadyExists);
         }
     }
-
-    [AllowAnonymous]
-    [HttpPost]
-    public async Task<IActionResult> GridGetAll()
-    {
-        return Ok(await _customerManager.GridGetAll());
-    }
+    //
+    // [AllowAnonymous]
+    // [HttpPost("gridGetAll")]
+    // public async Task<IActionResult> GridGetAll()
+    // {
+    //     return Ok(await _customerManager.GridGetAll());
+    // }
 }

@@ -15,10 +15,13 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddInfrastructure(_config);
+        services.AddSwaggerGen();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UseSwagger();
+        app.UseSwaggerUI();
         app.UseCors("AllowFrontendCorsPolicy");
         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
         app.UseRouting();

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VaraticPrim.Application.Service;
 using VaraticPrim.Framework;
 using VaraticPrim.Infrastructure.Options;
 using VaraticPrim.Infrastructure.Persistence;
@@ -45,6 +46,7 @@ public static class DependencyInjection
         services.AddMigrations(configuration);
         services.AddFramework();
         services.AddRepositories();
+        services.AddServices();
         services.AddDbContext(configuration.GetConnectionString("PostgresConnection"));
     }
 

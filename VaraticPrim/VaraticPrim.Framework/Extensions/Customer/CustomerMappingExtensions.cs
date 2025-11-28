@@ -13,7 +13,6 @@ public static class CustomerMappingExtensions
         {
             Id          = entity.Id,
             AccountNr   = entity.AccountNr,
-            Deleted     = entity.Deleted,
             Location    = entity.Location?.ToModel(),
             ContactInfo = entity.ContactInfo?.ToModel()
         };

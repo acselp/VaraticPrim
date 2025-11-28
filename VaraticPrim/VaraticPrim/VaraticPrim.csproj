@@ -10,14 +10,15 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2"/>
-        <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="6.1.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\VaraticPrim.Application\VaraticPrim.Application.csproj" />
-      <ProjectReference Include="..\VaraticPrim.Framework\VaraticPrim.Framework.csproj" />
-      <ProjectReference Include="..\VaraticPrim.Infrastructure\VaraticPrim.Infrastructure.csproj" />
-      <ProjectReference Include="..\VaraticPrim.JwtAuth\VaraticPrim.JwtAuth.csproj" />
-      <ProjectReference Include="..\VaraticPrim.Migrations.Evolve\VaraticPrim.Migrations.Evolve.csproj" />
+        <ProjectReference Include="..\VaraticPrim.Application\VaraticPrim.Application.csproj"/>
+        <ProjectReference Include="..\VaraticPrim.Framework\VaraticPrim.Framework.csproj"/>
+        <ProjectReference Include="..\VaraticPrim.Infrastructure\VaraticPrim.Infrastructure.csproj"/>
+        <ProjectReference Include="..\VaraticPrim.JwtAuth\VaraticPrim.JwtAuth.csproj"/>
+        <ProjectReference Include="..\VaraticPrim.Migrations.Evolve\VaraticPrim.Migrations.Evolve.csproj"/>
     </ItemGroup>
 </Project>

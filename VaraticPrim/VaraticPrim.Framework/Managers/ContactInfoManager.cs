@@ -30,7 +30,6 @@ public class ContactInfoManager
 
             var contactInfoEntity = new ContactInfoEntity
             {
-                CustomerId = model.CustomerId,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Mobile = model.Mobile,

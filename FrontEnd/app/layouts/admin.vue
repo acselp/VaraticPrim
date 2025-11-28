@@ -4,7 +4,7 @@ import { LayoutDashboard, Users } from "lucide-vue-next";
 const menuItems = [
   {
     title: "Dashboard",
-    url: "/admin/dashboard",
+    url: "/admin",
     icon: LayoutDashboard,
   },
   {
