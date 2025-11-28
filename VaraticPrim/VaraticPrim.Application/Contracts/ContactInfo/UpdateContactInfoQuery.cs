@@ -1,6 +1,6 @@
 namespace VaraticPrim.Application.Contracts.ContactInfo;
 
-public class CreateContactInfoQuery
+public class UpdateContactInfoQuery
 {
     public string  FirstName { get; set; }
     public string  LastName  { get; set; }

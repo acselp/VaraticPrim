@@ -14,7 +14,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\VaraticPrim.Application\VaraticPrim.Application.csproj"/>
-        <ProjectReference Include="..\VaraticPrim.Domain\VaraticPrim.Domain.csproj"/>
         <ProjectReference Include="..\VaraticPrim.JwtAuth\VaraticPrim.JwtAuth.csproj"/>
     </ItemGroup>
 

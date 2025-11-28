@@ -34,6 +34,20 @@ public class CustomerController : BaseAdminController
             return BadRequest(FrontEndErrors.CustomerAccountNrAlreadyExists);
         }
     }
+
+    [AllowAnonymous]
+    [HttpPost("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateCustomerModel model)
+    {
+        try
+        {
+            return Ok(await _customerManager.Update(model));
+        }
+        catch (CustomerAccountNumberAlreadyExists)
+        {
+            return BadRequest(FrontEndErrors.CustomerAccountNrAlreadyExists);
+        }
+    }
     //
     // [AllowAnonymous]
     // [HttpPost("gridGetAll")]

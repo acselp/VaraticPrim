@@ -9,17 +9,40 @@ public static class ContactInfoMapper
     {
         return new ContactInfoEntity
         {
-            FirstName  = query.FirstName,
-            LastName   = query.LastName,
-            Phone      = query.Phone,
-            Mobile     = query.Mobile,
-            CustomerId = query.CustomerId
+            FirstName = query.FirstName,
+            LastName  = query.LastName,
+            Phone     = query.Phone,
+            Mobile    = query.Mobile
+        };
+    }
+
+    public static ContactInfoEntity ToEntity(this UpdateContactInfoQuery query)
+    {
+        return new ContactInfoEntity
+        {
+            FirstName = query.FirstName,
+            LastName  = query.LastName,
+            Phone     = query.Phone,
+            Mobile    = query.Mobile
         };
     }
 
     public static CreateContactInfoResult ToCreateResult(this ContactInfoEntity entity)
     {
         return new CreateContactInfoResult
+        {
+            Id         = entity.Id,
+            FirstName  = entity.FirstName,
+            LastName   = entity.LastName,
+            Phone      = entity.Phone,
+            Mobile     = entity.Mobile,
+            CustomerId = entity.CustomerId
+        };
+    }
+
+    public static UpdateContactInfoResult ToUpdateResult(this ContactInfoEntity entity)
+    {
+        return new UpdateContactInfoResult
         {
             Id         = entity.Id,
             FirstName  = entity.FirstName,

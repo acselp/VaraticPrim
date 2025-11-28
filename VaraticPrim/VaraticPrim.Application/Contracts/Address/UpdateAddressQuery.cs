@@ -1,10 +1,8 @@
-using VaraticPrim.Framework.Models.Location;
-using VaraticPrim.Framework.Models.Shared;
+namespace VaraticPrim.Application.Contracts.Address;
 
-namespace VaraticPrim.Framework.Models.Address;
-
-public class AddressModel : BaseReadModel
+public class UpdateAddressQuery
 {
+    public int     Id          { get; set; }
     public string? Street      { get; set; }
     public string? HouseNr     { get; set; }
     public string? Block       { get; set; }
@@ -14,7 +12,5 @@ public class AddressModel : BaseReadModel
     public string? District    { get; set; }
     public string? PostalCode  { get; set; }
     public string? Country     { get; set; }
-
-    public int           LocationId { get; set; }
-    public LocationModel Location   { get; set; }
+    public int     LocationId  { get; set; }
 }

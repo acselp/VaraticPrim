@@ -7,16 +7,11 @@ namespace VaraticPrim.Application.Service;
 
 public class CustomerService
 {
-    private readonly IAddressRepository     _addressRepository;
-    private readonly IContactInfoRepository _contactInfoRepository;
-    private readonly ICustomerRepository    _customerRepository;
+    private readonly ICustomerRepository _customerRepository;
 
-    public CustomerService(ICustomerRepository customerRepository, IContactInfoRepository contactInfoRepository,
-                           IAddressRepository  addressRepository)
+    public CustomerService(ICustomerRepository customerRepository)
     {
-        _customerRepository    = customerRepository;
-        _contactInfoRepository = contactInfoRepository;
-        _addressRepository     = addressRepository;
+        _customerRepository = customerRepository;
     }
 
     public async Task<CreateCustomerResult> Create(CreateCustomerQuery query)
@@ -29,5 +24,17 @@ public class CustomerService
         await _customerRepository.Insert(customerEntity);
 
         return customerEntity.ToCreateResult();
+    }
+
+    public async Task<UpdateCustomerResult> Update(UpdateCustomerQuery query)
+    {
+        if (await _customerRepository.AccountNrExists(query.AccountNr))
+            throw new CustomerAccountNumberAlreadyExists("Account number already exists");
+
+        var customerEntity = query.ToEntity();
+
+        await _customerRepository.Update(customerEntity);
+
+        return customerEntity.ToUpdateResult();
     }
 }

@@ -1,3 +1,5 @@
+using VaraticPrim.Application.Contracts.Location;
+using VaraticPrim.Application.Mappers;
 using VaraticPrim.Domain.Entities;
 using VaraticPrim.Framework.Extensions.Address;
 using VaraticPrim.Framework.Extensions.Counter;
@@ -17,6 +19,17 @@ public static class LocationMappingExtensions
             Customer    = entity.Customer.ToModel(),
             Address     = entity.Address?.ToModel(),
             CounterList = entity.CounterList.Select(x => x.ToModel())
+        };
+    }
+
+    public static UpdateLocationResult ToUpdateResult(this LocationEntity entity)
+    {
+        return new UpdateLocationResult
+        {
+            Id          = entity.Id,
+            CustomerId  = entity.CustomerId,
+            Address     = entity.Address?.ToUpdateResult(),
+            CounterList = entity.CounterList.Select(x => x.ToUpdateResult())
         };
     }
 }

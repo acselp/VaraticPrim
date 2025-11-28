@@ -38,4 +38,19 @@ public class CustomerManager
             throw;
         }
     }
+
+    public async Task<CustomerModel> Update(UpdateCustomerModel model)
+    {
+        try
+        {
+            var query = model.ToQuery();
+
+            return (await _customerService.Update(query)).ToModel();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Could not update customer.");
+            throw;
+        }
+    }
 }

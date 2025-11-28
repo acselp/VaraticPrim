@@ -15,12 +15,33 @@ public static class CustomerMapper
         };
     }
 
+    public static CustomerModel ToModel(this UpdateCustomerResult result)
+    {
+        return new CustomerModel
+        {
+            Id          = result.Id,
+            AccountNr   = result.AccountNr,
+            ContactInfo = result.ContactInfo.ToModel(),
+            Location    = result.Location?.ToModel()
+        };
+    }
+
     public static CreateCustomerQuery ToQuery(this CreateCustomerModel model)
     {
         return new CreateCustomerQuery
         {
             AccountNr   = model.AccountNr,
-            ContactInfo = model.ContactInfo.ToContract()
+            ContactInfo = model.ContactInfo.ToQuery()
+        };
+    }
+
+    public static UpdateCustomerQuery ToQuery(this UpdateCustomerModel model)
+    {
+        return new UpdateCustomerQuery
+        {
+            AccountNr   = model.AccountNr,
+            ContactInfo = model.ContactInfo.ToQuery(),
+            Location    = model.Location?.ToQuery()
         };
     }
 }

@@ -1,7 +1,8 @@
 namespace VaraticPrim.Application.Contracts.Address;
 
-public class CreateAddressQuery
+public class UpdateAddressResult
 {
+    public int     Id          { get; set; }
     public string? Street      { get; set; }
     public string? HouseNr     { get; set; }
     public string? Block       { get; set; }

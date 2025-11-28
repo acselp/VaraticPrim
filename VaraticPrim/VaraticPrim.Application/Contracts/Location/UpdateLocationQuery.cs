@@ -3,9 +3,9 @@ using VaraticPrim.Application.Contracts.Counter;
 
 namespace VaraticPrim.Application.Contracts.Location;
 
-public class CreateLocationQuery
+public class UpdateLocationQuery
 {
     public         int                             CustomerId  { get; set; }
-    public virtual CreateAddressQuery?             Address     { get; set; }
-    public virtual IEnumerable<CreateCounterQuery> CounterList { get; set; } = new List<CreateCounterQuery>();
+    public virtual UpdateAddressQuery?             Address     { get; set; }
+    public virtual IEnumerable<UpdateCounterQuery> CounterList { get; set; } = new List<UpdateCounterQuery>();
 }
