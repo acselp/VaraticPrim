@@ -10,7 +10,8 @@ public static class CustomerMapper
         return new CustomerEntity
         {
             AccountNr   = query.AccountNr,
-            ContactInfo = query.ContactInfo.ToEntity()
+            ContactInfo = query.ContactInfo.ToEntity(),
+            Location    = new LocationEntity()
         };
     }
 
@@ -21,7 +22,7 @@ public static class CustomerMapper
             Id          = query.Id,
             AccountNr   = query.AccountNr,
             ContactInfo = query.ContactInfo.ToEntity(),
-            Location    = query.Location.ToEntity()
+            Location    = query.Location?.ToEntity()
         };
     }
 
