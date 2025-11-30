@@ -40,6 +40,19 @@ public static class ContactInfoMapper
         };
     }
 
+    public static GetContactInfoResult ToGetResult(this ContactInfoEntity entity)
+    {
+        return new GetContactInfoResult
+        {
+            Id         = entity.Id,
+            FirstName  = entity.FirstName,
+            LastName   = entity.LastName,
+            Phone      = entity.Phone,
+            Mobile     = entity.Mobile,
+            CustomerId = entity.CustomerId
+        };
+    }
+
     public static UpdateContactInfoResult ToUpdateResult(this ContactInfoEntity entity)
     {
         return new UpdateContactInfoResult

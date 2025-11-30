@@ -46,4 +46,15 @@ public static class CustomerMapper
             Location    = entity.Location?.ToUpdateResult()
         };
     }
+
+    public static GetCustomerResult ToGetResult(this CustomerEntity entity)
+    {
+        return new GetCustomerResult
+        {
+            Id          = entity.Id,
+            AccountNr   = entity.AccountNr,
+            ContactInfo = entity.ContactInfo.ToGetResult(),
+            Location    = entity.Location?.ToGetResult()
+        };
+    }
 }

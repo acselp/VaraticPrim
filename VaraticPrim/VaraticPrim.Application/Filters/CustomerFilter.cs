@@ -1,6 +1,6 @@
 using VaraticPrim.Domain.Paged;
 
-namespace VaraticPrim.Framework.Filters;
+namespace VaraticPrim.Application.Filters;
 
 public class CustomerFilter : PagedFilter
 {

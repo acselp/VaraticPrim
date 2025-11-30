@@ -8,6 +8,7 @@ using VaraticPrim.Framework.Models.Customer;
 
 namespace VaraticPrim.Api.Controllers.Admin;
 
+[Route("customer")]
 public class CustomerController : BaseAdminController
 {
     private readonly CustomerManager _customerManager;
@@ -48,11 +49,11 @@ public class CustomerController : BaseAdminController
             return BadRequest(FrontEndErrors.CustomerAccountNrAlreadyExists);
         }
     }
-    //
-    // [AllowAnonymous]
-    // [HttpPost("gridGetAll")]
-    // public async Task<IActionResult> GridGetAll()
-    // {
-    //     return Ok(await _customerManager.GridGetAll());
-    // }
+
+    [AllowAnonymous]
+    [HttpGet("search")]
+    public async Task<IActionResult> Search()
+    {
+        return Ok(await _customerManager.Search());
+    }
 }

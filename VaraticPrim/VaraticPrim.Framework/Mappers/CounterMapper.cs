@@ -28,4 +28,16 @@ public static class CounterMapper
             UsageType    = model.UsageType
         };
     }
+
+    public static CounterModel ToModel(this GetCounterResult model)
+    {
+        return new CounterModel
+        {
+            Id           = model.Id,
+            LocationId   = model.LocationId,
+            Barcode      = model.Barcode,
+            ReadingValue = model.ReadingValue,
+            UsageType    = model.UsageType
+        };
+    }
 }

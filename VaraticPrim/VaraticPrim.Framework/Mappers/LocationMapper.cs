@@ -25,4 +25,15 @@ public static class LocationMapper
             CounterList = model.CounterList.Select(CounterMapper.ToModel)
         };
     }
+
+    public static LocationModel ToModel(this GetLocationResult model)
+    {
+        return new LocationModel
+        {
+            Id          = model.Id,
+            CustomerId  = model.CustomerId,
+            Address     = model.Address?.ToModel(),
+            CounterList = model.CounterList.Select(CounterMapper.ToModel)
+        };
+    }
 }

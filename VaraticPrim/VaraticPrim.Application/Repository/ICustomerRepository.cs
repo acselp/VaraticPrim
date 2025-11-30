@@ -1,6 +1,6 @@
+using VaraticPrim.Application.Filters;
 using VaraticPrim.Domain.Entities;
 using VaraticPrim.Domain.Paged;
-using VaraticPrim.Framework.Filters;
 
 namespace VaraticPrim.Application.Repository;
 

@@ -27,4 +27,16 @@ public static class CounterMapper
             LocationId   = counter.LocationId
         };
     }
+
+    public static GetCounterResult ToGetResult(this CounterEntity counter)
+    {
+        return new GetCounterResult
+        {
+            Id           = counter.Id,
+            ReadingValue = counter.ReadingValue,
+            Barcode      = counter.Barcode,
+            UsageType    = counter.UsageType,
+            LocationId   = counter.LocationId
+        };
+    }
 }

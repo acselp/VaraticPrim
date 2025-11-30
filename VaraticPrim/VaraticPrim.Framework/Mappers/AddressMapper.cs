@@ -40,4 +40,22 @@ public static class AddressMapper
             Street      = model.Street
         };
     }
+
+    public static AddressModel ToModel(this GetAddressResult model)
+    {
+        return new AddressModel
+        {
+            Id          = model.Id,
+            ApartmentNr = model.ApartmentNr,
+            Block       = model.Block,
+            Country     = model.Country,
+            District    = model.District,
+            Entrance    = model.Entrance,
+            HouseNr     = model.HouseNr,
+            Locality    = model.Locality,
+            PostalCode  = model.PostalCode,
+            LocationId  = model.LocationId,
+            Street      = model.Street
+        };
+    }
 }

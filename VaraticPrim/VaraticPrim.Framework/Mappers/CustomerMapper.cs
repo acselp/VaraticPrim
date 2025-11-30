@@ -26,6 +26,17 @@ public static class CustomerMapper
         };
     }
 
+    public static CustomerModel ToModel(this GetCustomerResult result)
+    {
+        return new CustomerModel
+        {
+            Id          = result.Id,
+            AccountNr   = result.AccountNr,
+            ContactInfo = result.ContactInfo.ToModel(),
+            Location    = result.Location?.ToModel()
+        };
+    }
+
     public static CreateCustomerQuery ToQuery(this CreateCustomerModel model)
     {
         return new CreateCustomerQuery

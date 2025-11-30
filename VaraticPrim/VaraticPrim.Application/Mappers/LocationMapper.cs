@@ -24,4 +24,14 @@ public static class LocationMapper
             Address     = entity.Address?.ToUpdateResult()
         };
     }
+
+    public static GetLocationResult ToGetResult(this LocationEntity entity)
+    {
+        return new GetLocationResult
+        {
+            CustomerId  = entity.CustomerId,
+            CounterList = entity.CounterList.Select(CounterMapper.ToGetResult).ToList(),
+            Address     = entity.Address?.ToGetResult()
+        };
+    }
 }

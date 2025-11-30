@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using VaraticPrim.Application.Filters;
 using VaraticPrim.Application.Repository;
 using VaraticPrim.Domain.Entities;
 using VaraticPrim.Domain.Paged;
-using VaraticPrim.Framework.Filters;
 using VaraticPrim.Infrastructure.Persistence;
 
 namespace VaraticPrim.Infrastructure.Repository;

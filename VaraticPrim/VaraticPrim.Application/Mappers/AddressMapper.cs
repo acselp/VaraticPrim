@@ -39,4 +39,22 @@ public static class AddressMapper
             LocationId  = entity.LocationId
         };
     }
+
+    public static GetAddressResult ToGetResult(this AddressEntity entity)
+    {
+        return new GetAddressResult
+        {
+            Id          = entity.Id,
+            Street      = entity.Street,
+            HouseNr     = entity.HouseNr,
+            Block       = entity.Block,
+            Entrance    = entity.Entrance,
+            ApartmentNr = entity.ApartmentNr,
+            Locality    = entity.Locality,
+            District    = entity.District,
+            PostalCode  = entity.PostalCode,
+            Country     = entity.Country,
+            LocationId  = entity.LocationId
+        };
+    }
 }

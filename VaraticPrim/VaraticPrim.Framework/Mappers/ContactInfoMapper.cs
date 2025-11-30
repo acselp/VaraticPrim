@@ -29,6 +29,18 @@ public static class ContactInfoMapper
         };
     }
 
+    public static ContactInfoModel ToModel(this GetContactInfoResult result)
+    {
+        return new ContactInfoModel
+        {
+            Id        = result.Id,
+            FirstName = result.FirstName,
+            LastName  = result.LastName,
+            Mobile    = result.Mobile,
+            Phone     = result.Phone
+        };
+    }
+
     public static CreateContactInfoQuery ToQuery(this CreateContactInfoModel model)
     {
         return new CreateContactInfoQuery

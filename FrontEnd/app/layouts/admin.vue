@@ -44,7 +44,7 @@ const menuItems = [
 
       <SidebarFooter>
         <div class="flex items-center justify-between px-4 py-2">
-          <span class="text-sm text-muted-foreground">Theme</span>
+          <span class="text-sm">Theme</span>
           <ThemeSwitcher />
         </div>
       </SidebarFooter>
