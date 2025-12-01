@@ -1,2 +1,0 @@
-cd FrontEnd && pnpm run prettier
-git add .
