@@ -21,6 +21,8 @@ import {
   AudioWaveform,
   Command,
   GalleryVerticalEnd,
+  UserCircle,
+  Receipt,
 } from 'lucide-react'
 import { ClerkLogo } from '@/assets/clerk-logo'
 import { type SidebarData } from '../types'
@@ -61,6 +63,16 @@ export const sidebarData: SidebarData = {
           title: 'Tasks',
           url: '/tasks',
           icon: ListTodo,
+        },
+        {
+          title: 'Customers',
+          url: '/customers',
+          icon: UserCircle,
+        },
+        {
+          title: 'Bills',
+          url: '/bills',
+          icon: Receipt,
         },
         {
           title: 'Apps',
