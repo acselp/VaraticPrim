@@ -1,17 +1,40 @@
-import { useEffect, useState } from 'react';
-import { getRouteApi } from '@tanstack/react-router';
-import { type SortingState, type VisibilityState, flexRender, getCoreRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
-import { cn } from '@/lib/utils';
-import { useTableUrlState } from '@/hooks/use-table-url-state';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { DataTablePagination, DataTableToolbar } from '@/components/data-table';
-import { type IRichTableProps } from '@/components/rich-table/types.ts';
-import { DataTableBulkActions } from './components/data-table-bulk-actions';
-import { useTableSource } from '@/components/rich-table/source-strategy.ts'
+import { useEffect, useState } from 'react'
+import { getRouteApi } from '@tanstack/react-router'
+import {
+  type SortingState,
+  type VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
+import { cn } from '@/lib/utils'
+import { useTableUrlState } from '@/hooks/use-table-url-state'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+import { priorities, statuses } from '../data/data'
+import { type Task } from '../data/schema'
+import { DataTableBulkActions } from './data-table-bulk-actions'
+import { tasksColumns as columns } from './tasks-columns'
 
 const route = getRouteApi('/_authenticated/tasks/')
 
-export function RichTable({ ...props }: IRichTableProps) {
+type DataTableProps = {
+  data: Task[]
+}
+
+export function TasksTable({ data }: DataTableProps) {
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
@@ -21,9 +44,6 @@ export function RichTable({ ...props }: IRichTableProps) {
   // const [globalFilter, onGlobalFilterChange] = useState('')
   // const [columnFilters, onColumnFiltersChange] = useState<ColumnFiltersState>([])
   // const [pagination, onPaginationChange] = useState<PaginationState>({ pageIndex: 0, pageSize: 10 })
-
-  const { data, isLoading } = useTableSource(props);
-
 
   // Synced with URL states (updated to match route search schema defaults)
   const {
@@ -48,7 +68,7 @@ export function RichTable({ ...props }: IRichTableProps) {
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
-    columns: props.Columns,
+    columns,
     state: {
       sorting,
       columnVisibility,
@@ -95,16 +115,16 @@ export function RichTable({ ...props }: IRichTableProps) {
         table={table}
         searchPlaceholder='Filter by title or ID...'
         filters={[
-          // {
-          //   columnId: 'status',
-          //   title: 'Status',
-          //   options: statuses,
-          // },
-          // {
-          //   columnId: 'priority',
-          //   title: 'Priority',
-          //   options: priorities,
-          // },
+          {
+            columnId: 'status',
+            title: 'Status',
+            options: statuses,
+          },
+          {
+            columnId: 'priority',
+            title: 'Priority',
+            options: priorities,
+          },
         ]}
       />
       <div className='overflow-hidden rounded-md border'>
@@ -125,9 +145,9 @@ export function RichTable({ ...props }: IRichTableProps) {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   )
                 })}
@@ -160,7 +180,7 @@ export function RichTable({ ...props }: IRichTableProps) {
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={props.Columns.length}
+                  colSpan={columns.length}
                   className='h-24 text-center'
                 >
                   No results.
