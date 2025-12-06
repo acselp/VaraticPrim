@@ -16,4 +16,9 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Abstractions\" />
+      <Folder Include="Scripts\" />
+    </ItemGroup>
+
 </Project>

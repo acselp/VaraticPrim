@@ -13,10 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaraticPrim.Domain", "Varat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaraticPrim.Infrastructure", "VaraticPrim.Infrastructure\VaraticPrim.Infrastructure.csproj", "{2FBEB71D-5BD5-4C6B-BD5B-BEF1B0D91536}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaraticPrim.Migrations", "VaraticPrim.Migrations\VaraticPrim.Migrations.csproj", "{FFC7D76C-623D-4974-9CEB-9E54452B8336}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaraticPrim.Migrations.Evolve", "VaraticPrim.Migrations.Evolve\VaraticPrim.Migrations.Evolve.csproj", "{795A12C8-33AB-4188-BC9F-CB1D0F0953EA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaraticPrim.Framework", "VaraticPrim.Framework\VaraticPrim.Framework.csproj", "{CE6E5DEE-20C9-42E1-B433-2463812FE6C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaraticPrim.JwtAuth", "VaraticPrim.JwtAuth\VaraticPrim.JwtAuth.csproj", "{1AB769C7-6DD0-4B13-A8AE-2CA03DC649D9}"
@@ -43,14 +39,6 @@ Global
 		{2FBEB71D-5BD5-4C6B-BD5B-BEF1B0D91536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FBEB71D-5BD5-4C6B-BD5B-BEF1B0D91536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FBEB71D-5BD5-4C6B-BD5B-BEF1B0D91536}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FFC7D76C-623D-4974-9CEB-9E54452B8336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFC7D76C-623D-4974-9CEB-9E54452B8336}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFC7D76C-623D-4974-9CEB-9E54452B8336}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFC7D76C-623D-4974-9CEB-9E54452B8336}.Release|Any CPU.Build.0 = Release|Any CPU
-		{795A12C8-33AB-4188-BC9F-CB1D0F0953EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{795A12C8-33AB-4188-BC9F-CB1D0F0953EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{795A12C8-33AB-4188-BC9F-CB1D0F0953EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{795A12C8-33AB-4188-BC9F-CB1D0F0953EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE6E5DEE-20C9-42E1-B433-2463812FE6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE6E5DEE-20C9-42E1-B433-2463812FE6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE6E5DEE-20C9-42E1-B433-2463812FE6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU

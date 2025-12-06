@@ -4,11 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VaraticPrim.Application.Service;
 using VaraticPrim.Framework;
+using VaraticPrim.Infrastructure.HostedServices;
 using VaraticPrim.Infrastructure.Options;
 using VaraticPrim.Infrastructure.Persistence;
 using VaraticPrim.Infrastructure.Repository;
 using VaraticPrim.JwtAuth;
-using VaraticPrim.Migrations.Evolve;
 
 namespace VaraticPrim.Infrastructure;
 
@@ -40,14 +40,13 @@ public static class DependencyInjection
                                         .AllowAnyMethod();
                               });
         });
-
         services.AddOptions(configuration);
         services.AddOptions();
-        services.AddMigrations(configuration);
         services.AddFramework();
         services.AddRepositories();
         services.AddServices();
-        services.AddDbContext(configuration.GetConnectionString("PostgresConnection"));
+        services.AddPersistance(configuration);
+        services.AddHostedServices();
     }
 
     private static void AddOptions(this IServiceCollection services, IConfiguration configuration)

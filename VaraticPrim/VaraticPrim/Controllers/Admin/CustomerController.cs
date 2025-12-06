@@ -50,10 +50,4 @@ public class CustomerController : BaseAdminController
         }
     }
 
-    [AllowAnonymous]
-    [HttpGet("search")]
-    public async Task<IActionResult> Search()
-    {
-        return Ok(await _customerManager.Search());
-    }
 }

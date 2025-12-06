@@ -1,4 +1,4 @@
-namespace VaraticPrim.Migrations.Scripts.Abstractions;
+namespace VaraticPrim.Infrastructure.Persistence.Migrations;
 
 public interface IMigrationRunner
 {

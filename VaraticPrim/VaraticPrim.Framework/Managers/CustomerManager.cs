@@ -1,7 +1,6 @@
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using VaraticPrim.Application.Service;
-using VaraticPrim.Domain.Paged;
 using VaraticPrim.Framework.Mappers;
 using VaraticPrim.Framework.Models.Customer;
 using VaraticPrim.Framework.Validators;
@@ -47,19 +46,6 @@ public class CustomerManager
             var query = model.ToQuery();
 
             return (await _customerService.Update(query)).ToModel();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Could not update customer.");
-            throw;
-        }
-    }
-
-    public async Task<PagedList<CustomerModel>> Search()
-    {
-        try
-        {
-            return (PagedList<CustomerModel>)(await _customerService.Search()).Select(CustomerMapper.ToModel);
         }
         catch (Exception ex)
         {

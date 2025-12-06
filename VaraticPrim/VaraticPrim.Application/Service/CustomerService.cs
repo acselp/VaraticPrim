@@ -1,9 +1,7 @@
 using VaraticPrim.Application.Contracts.Customer;
-using VaraticPrim.Application.Filters;
 using VaraticPrim.Application.Mappers;
 using VaraticPrim.Application.Repository;
 using VaraticPrim.Domain.Exceptions;
-using VaraticPrim.Domain.Paged;
 
 namespace VaraticPrim.Application.Service;
 
@@ -38,10 +36,5 @@ public class CustomerService
         await _customerRepository.Update(customerEntity);
 
         return customerEntity.ToUpdateResult();
-    }
-
-    public async Task<PagedList<GetCustomerResult>> Search()
-    {
-        return await _customerRepository.GetAllFiltered(new CustomerFilter())
     }
 }
