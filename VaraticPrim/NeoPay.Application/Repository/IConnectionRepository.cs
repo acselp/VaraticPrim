@@ -1,0 +1,9 @@
+using NeoPay.Domain.Entities;
+
+namespace NeoPay.Application.Repository;
+
+public interface IConnectionRepository : IGenericRepository<ConnectionEntity>
+{
+    Task<IEnumerable<ConnectionEntity>> GetByCustomerId(int customerId);
+    Task<IEnumerable<ConnectionEntity>> GetByUtilityId(int utilityId);
+}

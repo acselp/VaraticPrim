@@ -1,0 +1,47 @@
+using Microsoft.AspNetCore.Mvc;
+
+namespace NeoPay.Api.Controllers.Admin;
+
+[Route("customer")]
+public class CustomerController : BaseAdminController
+{
+    // private readonly CustomerManager _customerManager;
+    //
+    // public CustomerController(CustomerManager customerManager)
+    // {
+    //     _customerManager = customerManager;
+    // }
+    //
+    // [AllowAnonymous]
+    // [HttpPost("create")]
+    // public async Task<IActionResult> Create([FromBody] CreateCustomerModel model)
+    // {
+    //     try
+    //     {
+    //         return Ok(await _customerManager.Create(model));
+    //     }
+    //     catch (ValidationException e)
+    //     {
+    //         return ValidationError(e);
+    //     }
+    //     catch (CustomerAccountNumberAlreadyExists)
+    //     {
+    //         return BadRequest(FrontEndErrors.CustomerAccountNrAlreadyExists);
+    //     }
+    // }
+    //
+    // [AllowAnonymous]
+    // [HttpPost("update")]
+    // public async Task<IActionResult> Update([FromBody] UpdateCustomerModel model)
+    // {
+    //     try
+    //     {
+    //         return Ok(await _customerManager.Update(model));
+    //     }
+    //     catch (CustomerAccountNumberAlreadyExists)
+    //     {
+    //         return BadRequest(FrontEndErrors.CustomerAccountNrAlreadyExists);
+    //     }
+    // }
+
+}
