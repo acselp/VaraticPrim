@@ -2,6 +2,7 @@ using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
 using NeoPay.Domain.Exceptions;
 using NeoPay.Domain.Filters;
+using NeoPay.Domain.Paged;
 
 namespace NeoPay.Application.Service;
 
@@ -23,7 +24,7 @@ public class CustomerService
         await _customerRepository.Insert(entity);
     }
 
-    public async Task<IList<CustomerEntity>> GetAll(CustomerGetAllFilter filter)
+    public async Task<PagedList<CustomerEntity>> GetAll(CustomerGetAllFilter filter)
     {
         return await _customerRepository.GetAll(filter);
     }

@@ -4,11 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 using NeoPay.Framework.Errors;
 using NeoPay.Framework.Errors.ApiError;
 using NeoPay.Framework.Errors.FrontEndErrors;
+using NeoPay.Framework.Models.Shared;
 
 namespace NeoPay.Api.Controllers.Shared;
 
 public class ApiBaseController : Controller
 {
+    protected PagedResultModel<T> PagedResult<T>(IList<T> data, int page, int pageSize)
+    {
+        return new PagedResultModel<T>
+        {
+            Total     = data.Count,
+            PageSize  = pageSize,
+            PageIndex = page,
+            Data      = data
+        };
+    }
+
     protected IActionResult ValidationError(ValidationException exception)
     {
         var error = new ApiErrorModel
