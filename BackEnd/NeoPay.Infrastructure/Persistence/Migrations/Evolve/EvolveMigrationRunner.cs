@@ -20,7 +20,7 @@ public class EvolveMigrationRunner : IMigrationRunner
         {
             IsEraseDisabled            = true,
             EmbeddedResourceAssemblies = [typeof(EvolveMigrationRunner).Assembly],
-            EmbeddedResourceFilters    = ["NeoPay.Api.Infrastructure.Persistence.Migrations.Evolve.Scripts"]
+            EmbeddedResourceFilters    = ["NeoPay.Infrastructure.Persistence.Migrations.Evolve.Scripts"]
         };
 
         _evolve.Placeholders = new Dictionary<string, string>

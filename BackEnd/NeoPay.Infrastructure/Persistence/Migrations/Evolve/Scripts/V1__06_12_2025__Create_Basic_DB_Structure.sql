@@ -1,3 +1,15 @@
+CREATE TABLE ${schema}.customer
+(
+    id             SERIAL PRIMARY KEY,
+    first_name     VARCHAR(150) NOT NULL,
+    last_name      VARCHAR(150) NOT NULL,
+    email          VARCHAR(120),
+    phone          VARCHAR(30),
+    account_nr     INT,
+    created_on_utc TIMESTAMPTZ DEFAULT now(),
+    updated_on_utc TIMESTAMPTZ DEFAULT now()
+);
+
 CREATE TABLE ${schema}.address
 (
     id             SERIAL PRIMARY KEY,
@@ -10,18 +22,6 @@ CREATE TABLE ${schema}.address
     apartment      VARCHAR(20),
     postal_code    VARCHAR(20),
     customer_id    INT REFERENCES ${schema}.customer (id),
-    created_on_utc TIMESTAMPTZ DEFAULT now(),
-    updated_on_utc TIMESTAMPTZ DEFAULT now()
-);
-
-CREATE TABLE ${schema}.customer
-(
-    id             SERIAL PRIMARY KEY,
-    first_name     VARCHAR(150) NOT NULL,
-    last_name      VARCHAR(150) NOT NULL,
-    email          VARCHAR(120),
-    phone          VARCHAR(30),
-    account_nr     INT,
     created_on_utc TIMESTAMPTZ DEFAULT now(),
     updated_on_utc TIMESTAMPTZ DEFAULT now()
 );
