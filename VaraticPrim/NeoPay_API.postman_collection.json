@@ -1,0 +1,978 @@
+{
+	"info": {
+		"_postman_id": "neopay-api-collection",
+		"name": "NeoPay API",
+		"description": "Complete API collection for NeoPay - Utility payment management system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has customer data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData).to.have.property('firstName');",
+									"    pm.expect(jsonData).to.have.property('accountNr');",
+									"    ",
+									"    // Save customer ID for use in other requests",
+									"    pm.collectionVariables.set(\"customerId\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone\": \"+1234567890\",\n  \"accountNr\": 100001\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer"
+							]
+						},
+						"description": "Create a new customer with account details"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has paginated structure\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('total');",
+									"    pm.expect(jsonData).to.have.property('pageIndex');",
+									"    pm.expect(jsonData).to.have.property('pageSize');",
+									"    pm.expect(jsonData).to.have.property('data');",
+									"    pm.expect(jsonData.data).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customer?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						},
+						"description": "Retrieve all customers with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has customer data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData).to.have.property('firstName');",
+									"        pm.expect(jsonData).to.have.property('lastName');",
+									"        pm.expect(jsonData).to.have.property('accountNr');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customer/{{customerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer",
+								"{{customerId}}"
+							]
+						},
+						"description": "Retrieve a specific customer by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has updated customer data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData.firstName).to.exist;",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{customerId}},\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"email\": \"john.smith@example.com\",\n  \"phone\": \"+1234567890\",\n  \"accountNr\": 100001\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer"
+							]
+						},
+						"description": "Update an existing customer's information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Customer deleted successfully\", function () {",
+									"        pm.expect(pm.response.text()).to.include('');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customer/{{customerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer",
+								"{{customerId}}"
+							]
+						},
+						"description": "Delete a customer by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Customer management endpoints - CRUD operations for customer entities"
+		},
+		{
+			"name": "Utility",
+			"item": [
+				{
+					"name": "Create Utility",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has utility data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData).to.have.property('unitType');",
+									"    ",
+									"    // Save utility ID for use in other requests",
+									"    pm.collectionVariables.set(\"utilityId\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Electricity\",\n  \"unitType\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/utility",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"utility"
+							]
+						},
+						"description": "Create a new utility service (unitType: 0=M3, 1=Kwh)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Utilities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has paginated structure\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('total');",
+									"    pm.expect(jsonData).to.have.property('pageIndex');",
+									"    pm.expect(jsonData).to.have.property('pageSize');",
+									"    pm.expect(jsonData).to.have.property('data');",
+									"    pm.expect(jsonData.data).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/utility?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"utility"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						},
+						"description": "Retrieve all utilities with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Utility By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has utility data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData).to.have.property('name');",
+									"        pm.expect(jsonData).to.have.property('unitType');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/utility/{{utilityId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"utility",
+								"{{utilityId}}"
+							]
+						},
+						"description": "Retrieve a specific utility by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Utility",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has updated utility data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData.name).to.exist;",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{utilityId}},\n  \"name\": \"Electricity - Updated\",\n  \"unitType\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/utility",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"utility"
+							]
+						},
+						"description": "Update an existing utility's information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Utility",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Utility deleted successfully\", function () {",
+									"        pm.expect(pm.response.text()).to.include('');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/utility/{{utilityId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"utility",
+								"{{utilityId}}"
+							]
+						},
+						"description": "Delete a utility by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Utility management endpoints - CRUD operations for utility services (Electricity, Gas, Water, etc.)"
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Create Address",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has address data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData).to.have.property('customerId');",
+									"        ",
+									"        // Save address ID for use in other requests",
+									"        pm.collectionVariables.set(\"addressId\", jsonData.id);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"country\": \"USA\",\n  \"region\": \"California\",\n  \"city\": \"San Francisco\",\n  \"street\": \"Market Street\",\n  \"house\": \"123\",\n  \"entrance\": \"A\",\n  \"apartment\": \"456\",\n  \"postalCode\": \"94102\",\n  \"customerId\": {{customerId}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/address",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address"
+							]
+						},
+						"description": "Create a new address linked to a customer (requires valid customerId)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Addresses",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has paginated structure\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('total');",
+									"    pm.expect(jsonData).to.have.property('pageIndex');",
+									"    pm.expect(jsonData).to.have.property('pageSize');",
+									"    pm.expect(jsonData).to.have.property('data');",
+									"    pm.expect(jsonData.data).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/address?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						},
+						"description": "Retrieve all addresses with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Address By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has address data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData).to.have.property('customerId');",
+									"        pm.expect(jsonData).to.have.property('city');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/address/{{addressId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address",
+								"{{addressId}}"
+							]
+						},
+						"description": "Retrieve a specific address by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has updated address data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData.customerId).to.exist;",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{addressId}},\n  \"country\": \"USA\",\n  \"region\": \"California\",\n  \"city\": \"Los Angeles\",\n  \"street\": \"Sunset Boulevard\",\n  \"house\": \"789\",\n  \"entrance\": \"B\",\n  \"apartment\": \"101\",\n  \"postalCode\": \"90028\",\n  \"customerId\": {{customerId}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/address",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address"
+							]
+						},
+						"description": "Update an existing address's information"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Address deleted successfully\", function () {",
+									"        pm.expect(pm.response.text()).to.include('');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/address/{{addressId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address",
+								"{{addressId}}"
+							]
+						},
+						"description": "Delete an address by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Address management endpoints - CRUD operations for customer addresses"
+		},
+		{
+			"name": "Connection",
+			"item": [
+				{
+					"name": "Create Connection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has connection data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData).to.have.property('customerId');",
+									"        pm.expect(jsonData).to.have.property('utilityId');",
+									"        pm.expect(jsonData).to.have.property('status');",
+									"        ",
+									"        // Save connection ID for use in other requests",
+									"        pm.collectionVariables.set(\"connectionId\", jsonData.id);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": 1,\n  \"customerId\": {{customerId}},\n  \"utilityId\": {{utilityId}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/connection",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"connection"
+							]
+						},
+						"description": "Create a new connection linking a customer to a utility service (status: 0=Inactive, 1=Active)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Connections",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has paginated structure\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('total');",
+									"    pm.expect(jsonData).to.have.property('pageIndex');",
+									"    pm.expect(jsonData).to.have.property('pageSize');",
+									"    pm.expect(jsonData).to.have.property('data');",
+									"    pm.expect(jsonData.data).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/connection?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"connection"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						},
+						"description": "Retrieve all connections with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Connection By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has connection data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData).to.have.property('customerId');",
+									"        pm.expect(jsonData).to.have.property('utilityId');",
+									"        pm.expect(jsonData).to.have.property('status');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/connection/{{connectionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"connection",
+								"{{connectionId}}"
+							]
+						},
+						"description": "Retrieve a specific connection by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Connection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response has updated connection data\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property('id');",
+									"        pm.expect(jsonData.status).to.exist;",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{connectionId}},\n  \"status\": 0,\n  \"customerId\": {{customerId}},\n  \"utilityId\": {{utilityId}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/connection",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"connection"
+							]
+						},
+						"description": "Update an existing connection's information (e.g., change status)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Connection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 404\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Connection deleted successfully\", function () {",
+									"        pm.expect(pm.response.text()).to.include('');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/connection/{{connectionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"connection",
+								"{{connectionId}}"
+							]
+						},
+						"description": "Delete a connection by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Connection management endpoints - CRUD operations for customer-utility connections"
+		}
+	],
+	"variable": [
+		{
+			"key": "customerId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "addressId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "connectionId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "utilityId",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}

@@ -37,4 +37,46 @@ public static class FrontEndErrors
         ErrorCode    = ApiErrorCodes.Login.InvalidRefreshTokenOrAccessToken,
         ErrorMessage = "Invalid refresh token or access token"
     };
+
+    public static Error ErrorLoadingCustomers { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Customer.ErrorLoadingCustomers,
+        ErrorMessage = "An error occurred while loading customers"
+    };
+
+    public static Error AddressCouldNotBeFound { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Address.AddressCouldNotBeFound,
+        ErrorMessage = "Address could not be found"
+    };
+
+    public static Error ErrorLoadingAddresses { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Address.ErrorLoadingAddresses,
+        ErrorMessage = "An error occurred while loading addresses"
+    };
+
+    public static Error ConnectionCouldNotBeFound { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Connection.ConnectionCouldNotBeFound,
+        ErrorMessage = "Connection could not be found"
+    };
+
+    public static Error ErrorLoadingConnections { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Connection.ErrorLoadingConnections,
+        ErrorMessage = "An error occurred while loading connections"
+    };
+
+    public static Error UtilityCouldNotBeFound { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Utility.UtilityCouldNotBeFound,
+        ErrorMessage = "Utility could not be found"
+    };
+
+    public static Error ErrorLoadingUtilities { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Utility.ErrorLoadingUtilities,
+        ErrorMessage = "An error occurred while loading utilities"
+    };
 }

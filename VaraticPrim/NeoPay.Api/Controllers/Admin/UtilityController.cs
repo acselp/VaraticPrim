@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using NeoPay.Domain.Exceptions;
+using NeoPay.Framework.Errors.FrontEndErrors;
 using NeoPay.Framework.Managers;
 using NeoPay.Framework.Models.Utility;
 
@@ -42,9 +43,9 @@ public class UtilityController : BaseAdminController
         {
             return ValidationError(ex);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            return NotFound(ex.Message);
+            return NotFound(FrontEndErrors.UtilityCouldNotBeFound);
         }
     }
 
@@ -56,9 +57,9 @@ public class UtilityController : BaseAdminController
             await _utilityManager.Delete(id);
             return Ok();
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            return NotFound(ex.Message);
+            return NotFound(FrontEndErrors.UtilityCouldNotBeFound);
         }
     }
 
@@ -70,9 +71,9 @@ public class UtilityController : BaseAdminController
             var result = await _utilityManager.GetAll(filter);
             return Ok(result);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(FrontEndErrors.ErrorLoadingUtilities);
         }
     }
 
@@ -84,9 +85,9 @@ public class UtilityController : BaseAdminController
             var result = await _utilityManager.GetById(id);
             return Ok(result);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            return NotFound(ex.Message);
+            return NotFound(FrontEndErrors.UtilityCouldNotBeFound);
         }
     }
 }

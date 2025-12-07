@@ -21,5 +21,24 @@ public static class ApiErrorCodes
     {
         public const string CustomerAlreadyExists = "customer_already_exists";
         public const string CustomerCouldNotBeFound = "customer_could_not_be_found";
+        public const string ErrorLoadingCustomers = "error_loading_customers";
+    }
+
+    public static class Address
+    {
+        public const string AddressCouldNotBeFound = "address_could_not_be_found";
+        public const string ErrorLoadingAddresses = "error_loading_addresses";
+    }
+
+    public static class Connection
+    {
+        public const string ConnectionCouldNotBeFound = "connection_could_not_be_found";
+        public const string ErrorLoadingConnections = "error_loading_connections";
+    }
+
+    public static class Utility
+    {
+        public const string UtilityCouldNotBeFound = "utility_could_not_be_found";
+        public const string ErrorLoadingUtilities = "error_loading_utilities";
     }
 }

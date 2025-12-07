@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using NeoPay.Domain.Exceptions;
+using NeoPay.Framework.Errors.FrontEndErrors;
 using NeoPay.Framework.Managers;
 using NeoPay.Framework.Models.Connection;
 
@@ -28,9 +29,9 @@ public class ConnectionController : BaseAdminController
         {
             return ValidationError(ex);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            return NotFound(ex.Message);
+            return NotFound(FrontEndErrors.ConnectionCouldNotBeFound);
         }
     }
 
@@ -46,9 +47,9 @@ public class ConnectionController : BaseAdminController
         {
             return ValidationError(ex);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            return NotFound(ex.Message);
+            return NotFound(FrontEndErrors.ConnectionCouldNotBeFound);
         }
     }
 
@@ -60,9 +61,9 @@ public class ConnectionController : BaseAdminController
             await _connectionManager.Delete(id);
             return Ok();
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            return NotFound(ex.Message);
+            return NotFound(FrontEndErrors.ConnectionCouldNotBeFound);
         }
     }
 
@@ -74,9 +75,9 @@ public class ConnectionController : BaseAdminController
             var result = await _connectionManager.GetAll(filter);
             return Ok(result);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(FrontEndErrors.ErrorLoadingConnections);
         }
     }
 
@@ -88,9 +89,9 @@ public class ConnectionController : BaseAdminController
             var result = await _connectionManager.GetById(id);
             return Ok(result);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            return NotFound(ex.Message);
+            return NotFound(FrontEndErrors.ConnectionCouldNotBeFound);
         }
     }
 }

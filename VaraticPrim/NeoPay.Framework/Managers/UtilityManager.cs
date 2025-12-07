@@ -59,9 +59,6 @@ public class UtilityManager
     public async Task<UtilityModel> GetById(int id)
     {
         var entity = await _utilityService.GetById(id);
-        if (entity == null)
-            throw new NeoPay.Domain.Exceptions.NotFoundException($"Utility with ID {id} not found");
-
         return _utilityMapper.Map(entity);
     }
 }

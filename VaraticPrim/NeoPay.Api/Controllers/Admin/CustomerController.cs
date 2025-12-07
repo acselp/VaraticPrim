@@ -71,9 +71,9 @@ public class CustomerController : BaseAdminController
             var result = await _customerManager.GetAll(filter);
             return Ok(result);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(FrontEndErrors.ErrorLoadingCustomers);
         }
     }
 
@@ -85,9 +85,9 @@ public class CustomerController : BaseAdminController
             var result = await _customerManager.GetById(id);
             return Ok(result);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            return NotFound(ex.Message);
+            return NotFound(FrontEndErrors.CustomerCouldNotBeFound);
         }
     }
 }

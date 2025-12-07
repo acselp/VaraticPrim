@@ -59,9 +59,6 @@ public class ConnectionManager
     public async Task<ConnectionModel> GetById(int id)
     {
         var entity = await _connectionService.GetById(id);
-        if (entity == null)
-            throw new NeoPay.Domain.Exceptions.NotFoundException($"Connection with ID {id} not found");
-
         return _connectionMapper.Map(entity);
     }
 }
