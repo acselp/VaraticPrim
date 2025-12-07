@@ -1,6 +1,6 @@
 namespace NeoPay.Domain.Paged;
 
-public abstract class PagedFilter
+public class PagedFilter
 {
     public int PageIndex { get; set; } = 0;
     public int PageSize  { get; set; } = int.MaxValue;

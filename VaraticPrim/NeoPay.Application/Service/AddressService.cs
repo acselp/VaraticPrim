@@ -1,6 +1,7 @@
 using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
 using NeoPay.Domain.Exceptions;
+using NeoPay.Domain.Paged;
 
 namespace NeoPay.Application.Service;
 
@@ -24,14 +25,24 @@ public class AddressService
         return await _addressRepository.Insert(entity);
     }
 
-    public async Task<AddressEntity?> GetById(int id)
+    public async Task<AddressEntity> GetById(int id)
     {
-        return await _addressRepository.GetById(id);
+        var entity = await _addressRepository.GetById(id);
+        
+        if (entity == null)
+            throw new NotFoundException($"Address with ID {id} not found");
+        
+        return entity;
     }
 
     public async Task<IEnumerable<AddressEntity>> GetAll()
     {
         return await _addressRepository.GetAll();
+    }
+
+    public async Task<PagedList<AddressEntity>> GetAll(PagedFilter filter)
+    {
+        return await _addressRepository.GetAll(filter);
     }
 
     public async Task<AddressEntity?> GetByCustomerId(int customerId)

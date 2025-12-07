@@ -1,51 +1,54 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using NeoPay.Domain.Exceptions;
-using NeoPay.Framework.Errors.FrontEndErrors;
 using NeoPay.Framework.Managers;
-using NeoPay.Framework.Models.Customer;
+using NeoPay.Framework.Models.Address;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("customer")]
-public class CustomerController : BaseAdminController
+[Route("address")]
+public class AddressController : BaseAdminController
 {
-    private readonly CustomerManager _customerManager;
+    private readonly AddressManager _addressManager;
 
-    public CustomerController(CustomerManager customerManager)
+    public AddressController(AddressManager addressManager)
     {
-        _customerManager = customerManager;
+        _addressManager = addressManager;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateCustomerModel customer)
+    public async Task<IActionResult> Create(CreateAddressModel address)
     {
         try
         {
-            await _customerManager.Create(customer);
+            await _addressManager.Create(address);
             return Ok();
         }
         catch (ValidationException ex)
         {
             return ValidationError(ex);
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
         }
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateCustomerModel customer)
+    public async Task<IActionResult> Update(UpdateAddressModel address)
     {
         try
         {
-            await _customerManager.Update(customer);
+            await _addressManager.Update(address);
             return Ok();
         }
         catch (ValidationException ex)
         {
             return ValidationError(ex);
         }
-        catch (CustomerAccountNumberAlreadyExists ex)
+        catch (NotFoundException ex)
         {
-            return BadRequest(FrontEndErrors.CustomerAccountNrAlreadyExists);
+            return NotFound(ex.Message);
         }
     }
 
@@ -54,21 +57,21 @@ public class CustomerController : BaseAdminController
     {
         try
         {
-            await _customerManager.Delete(id);
+            await _addressManager.Delete(id);
             return Ok();
         }
-        catch (NotFoundException)
+        catch (NotFoundException ex)
         {
-            return BadRequest(FrontEndErrors.CustomerCouldNotBeFound);
+            return NotFound(ex.Message);
         }
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] GetCustomerFilterModel filter)
+    public async Task<IActionResult> GetAll([FromQuery] GetAddressFilterModel filter)
     {
         try
         {
-            var result = await _customerManager.GetAll(filter);
+            var result = await _addressManager.GetAll(filter);
             return Ok(result);
         }
         catch (Exception ex)
@@ -82,7 +85,7 @@ public class CustomerController : BaseAdminController
     {
         try
         {
-            var result = await _customerManager.GetById(id);
+            var result = await _addressManager.GetById(id);
             return Ok(result);
         }
         catch (NotFoundException ex)

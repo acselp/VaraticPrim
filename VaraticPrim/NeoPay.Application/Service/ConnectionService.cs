@@ -1,6 +1,7 @@
 using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
 using NeoPay.Domain.Exceptions;
+using NeoPay.Domain.Paged;
 
 namespace NeoPay.Application.Service;
 
@@ -41,6 +42,11 @@ public class ConnectionService
     public async Task<IEnumerable<ConnectionEntity>> GetAll()
     {
         return await _connectionRepository.GetAll();
+    }
+
+    public async Task<PagedList<ConnectionEntity>> GetAll(PagedFilter filter)
+    {
+        return await _connectionRepository.GetAll(filter);
     }
 
     public async Task<IEnumerable<ConnectionEntity>> GetByCustomerId(int customerId)

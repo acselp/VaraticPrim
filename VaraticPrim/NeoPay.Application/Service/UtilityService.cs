@@ -1,6 +1,7 @@
 using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
 using NeoPay.Domain.Exceptions;
+using NeoPay.Domain.Paged;
 
 namespace NeoPay.Application.Service;
 
@@ -26,6 +27,11 @@ public class UtilityService
     public async Task<IEnumerable<UtilityEntity>> GetAll()
     {
         return await _utilityRepository.GetAll();
+    }
+
+    public async Task<PagedList<UtilityEntity>> GetAll(PagedFilter filter)
+    {
+        return await _utilityRepository.GetAll(filter);
     }
 
     public async Task<UtilityEntity> Update(UtilityEntity entity)

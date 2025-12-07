@@ -7,6 +7,6 @@ public static class DependencyInjection
 {
     public static void AddValidators(this IServiceCollection services)
     {
-        // services.AddValidatorsFromAssemblyContaining<UpdateCustomerModelValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateCustomerModelValidator>();
     }
 }

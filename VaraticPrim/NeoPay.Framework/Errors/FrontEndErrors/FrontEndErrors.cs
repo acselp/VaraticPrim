@@ -19,6 +19,12 @@ public static class FrontEndErrors
         ErrorCode    = ApiErrorCodes.Customer.CustomerAlreadyExists,
         ErrorMessage = "Customer account number already exists"
     };
+    
+    public static Error CustomerCouldNotBeFound { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Customer.CustomerCouldNotBeFound,
+        ErrorMessage = "Customer could not be found"
+    };
 
     public static Error WrongPasswordOrEmailError { get; } = new()
     {

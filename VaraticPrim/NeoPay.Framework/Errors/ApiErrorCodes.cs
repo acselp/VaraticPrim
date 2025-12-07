@@ -20,5 +20,6 @@ public static class ApiErrorCodes
     public static class Customer
     {
         public const string CustomerAlreadyExists = "customer_already_exists";
+        public const string CustomerCouldNotBeFound = "customer_could_not_be_found";
     }
 }
