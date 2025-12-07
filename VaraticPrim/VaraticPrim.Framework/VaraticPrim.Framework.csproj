@@ -7,14 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentValidation" Version="12.0.0" />
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+        <PackageReference Include="FluentValidation" Version="12.0.0"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0-preview.2.25163.2"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\VaraticPrim.Application\VaraticPrim.Application.csproj"/>
-        <ProjectReference Include="..\VaraticPrim.JwtAuth\VaraticPrim.JwtAuth.csproj"/>
     </ItemGroup>
 
 </Project>

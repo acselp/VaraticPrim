@@ -1,7 +1,7 @@
-using VaraticPrim.Application.Contracts.Customer;
-using VaraticPrim.Application.Mappers;
 using VaraticPrim.Application.Repository;
+using VaraticPrim.Domain.Entities;
 using VaraticPrim.Domain.Exceptions;
+using VaraticPrim.Domain.Filters;
 
 namespace VaraticPrim.Application.Service;
 
@@ -14,27 +14,17 @@ public class CustomerService
         _customerRepository = customerRepository;
     }
 
-    public async Task<CreateCustomerResult> Create(CreateCustomerQuery query)
+    public async Task Create(CustomerEntity entity)
     {
-        if (await _customerRepository.AccountNrExists(query.AccountNr))
-            throw new CustomerAccountNumberAlreadyExists("Account number already exists");
+        if (await _customerRepository.AccountNrExists(entity.AccountNr))
+            throw new
+                CustomerAccountNumberAlreadyExists($"Customer with account number: {entity.AccountNr} already exists");
 
-        var customerEntity = query.ToEntity();
-
-        await _customerRepository.Insert(customerEntity);
-
-        return customerEntity.ToCreateResult();
+        await _customerRepository.Insert(entity);
     }
 
-    public async Task<UpdateCustomerResult> Update(UpdateCustomerQuery query)
+    public async Task<IList<CustomerEntity>> GetAll(CustomerGetAllFilter filter)
     {
-        if (await _customerRepository.AccountNrExists(query.AccountNr))
-            throw new CustomerAccountNumberAlreadyExists("Account number already exists");
-
-        var customerEntity = query.ToEntity();
-
-        await _customerRepository.Update(customerEntity);
-
-        return customerEntity.ToUpdateResult();
+        return await _customerRepository.GetAll(filter);
     }
 }

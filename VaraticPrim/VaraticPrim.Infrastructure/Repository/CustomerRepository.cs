@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using VaraticPrim.Application.Filters;
 using VaraticPrim.Application.Repository;
 using VaraticPrim.Domain.Entities;
+using VaraticPrim.Domain.Filters;
 using VaraticPrim.Domain.Paged;
 using VaraticPrim.Infrastructure.Persistence;
 
@@ -15,12 +15,12 @@ public class CustomerRepository(PostgresDbContext context)
         return await Table.AnyAsync(x => x.AccountNr == accountNr);
     }
 
-    public async Task<PagedList<CustomerEntity>> GetAllFiltered(CustomerFilter filter)
+    public Task<PagedList<CustomerEntity>> GetAll(CustomerGetAllFilter filter)
     {
-        var query = Table.AsQueryable();
+        var query = Table;
 
-        query = query.Where(x => x.Deleted == filter.Deleted);
+        query = query.Where(x => x.AccountNr > 0);
 
-        return await query.ToPagedAsync(filter.PageIndex, filter.PageSize);
+        return query.ToPagedAsync(filter.PageIndex, filter.PageSize);
     }
 }

@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VaraticPrim.Domain.Exceptions;
-using VaraticPrim.Framework.Errors.FrontEndErrors;
 using VaraticPrim.Framework.Managers;
 using VaraticPrim.Framework.Models.User;
 using ValidationException = FluentValidation.ValidationException;
@@ -34,10 +32,6 @@ public class UserController : BaseAdminController
         catch (ValidationException e)
         {
             return ValidationError(e);
-        }
-        catch (UserAlreadyExistsException e)
-        {
-            return BadRequest(FrontEndErrors.UserAlreadyExists);
         }
     }
 }

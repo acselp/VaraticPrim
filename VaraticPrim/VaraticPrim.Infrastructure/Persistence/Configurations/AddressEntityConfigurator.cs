@@ -9,13 +9,17 @@ public class AddressEntityConfigurator : IEntityTypeConfiguration<AddressEntity>
     public void Configure(EntityTypeBuilder<AddressEntity> builder)
     {
         builder.ToTable("address", "public");
-        
+
+        builder.HasOne<CustomerEntity>(x => x.Customer)
+               .WithOne(x => x.Address)
+               .HasForeignKey<AddressEntity>(x => x.CustomerId);
+
         builder
            .Property(x => x.Street)
            .HasMaxLength(255);
 
         builder
-           .Property(x => x.HouseNr)
+           .Property(x => x.House)
            .HasMaxLength(50);
 
         builder
@@ -27,7 +31,7 @@ public class AddressEntityConfigurator : IEntityTypeConfiguration<AddressEntity>
            .HasMaxLength(50);
 
         builder
-           .Property(x => x.District)
+           .Property(x => x.Region)
            .HasMaxLength(50);
 
         builder
@@ -35,11 +39,11 @@ public class AddressEntityConfigurator : IEntityTypeConfiguration<AddressEntity>
            .HasMaxLength(50);
 
         builder
-           .Property(x => x.Locality)
+           .Property(x => x.City)
            .HasMaxLength(50);
 
         builder
-           .Property(x => x.ApartmentNr)
+           .Property(x => x.Apartment)
            .HasMaxLength(50);
 
         builder

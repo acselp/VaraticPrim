@@ -1,4 +1,5 @@
 using VaraticPrim.Domain.Entities;
+using VaraticPrim.Domain.Paged;
 
 namespace VaraticPrim.Application.Repository;
 
@@ -12,4 +13,5 @@ public interface IGenericRepository<T> where T : BaseEntity
     Task<IEnumerable<T>> UpdateRange(IEnumerable<T> entities);
     Task                 Delete(T                   entity);
     Task                 DeleteRange(IEnumerable<T> entities);
+    Task<PagedList<T>>   GetAll(PagedFilter         filter);
 }

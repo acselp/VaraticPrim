@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VaraticPrim.Application.Service;
@@ -8,7 +6,6 @@ using VaraticPrim.Infrastructure.HostedServices;
 using VaraticPrim.Infrastructure.Options;
 using VaraticPrim.Infrastructure.Persistence;
 using VaraticPrim.Infrastructure.Repository;
-using VaraticPrim.JwtAuth;
 
 namespace VaraticPrim.Infrastructure;
 
@@ -52,7 +49,6 @@ public static class DependencyInjection
     private static void AddOptions(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<DbConnectionStringOptions>(configuration.GetSection(DbConnectionStringOptions.SectionName));
-        services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
         services.Configure<FrontendOptions>(configuration.GetSection(FrontendOptions.SectionName));
     }
 }

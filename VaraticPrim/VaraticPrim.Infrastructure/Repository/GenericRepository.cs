@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using VaraticPrim.Application.Repository;
 using VaraticPrim.Domain.Entities;
+using VaraticPrim.Domain.Paged;
 
 namespace VaraticPrim.Infrastructure.Repository;
 
@@ -81,6 +82,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         _context.Set<T>().RemoveRange(entities);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<PagedList<T>> GetAll(PagedFilter filter)
+    {
+        return await _context.Set<T>().ToPagedAsync(filter.PageIndex, filter.PageSize);
     }
 
     public async Task<T?> Find(Expression<Func<T, bool>> predicate)

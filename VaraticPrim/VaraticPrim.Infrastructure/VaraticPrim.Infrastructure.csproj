@@ -8,7 +8,6 @@
         <ProjectReference Include="..\VaraticPrim.Application\VaraticPrim.Application.csproj"/>
         <ProjectReference Include="..\VaraticPrim.Domain\VaraticPrim.Domain.csproj"/>
         <ProjectReference Include="..\VaraticPrim.Framework\VaraticPrim.Framework.csproj"/>
-        <ProjectReference Include="..\VaraticPrim.JwtAuth\VaraticPrim.JwtAuth.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Npgsql" Version="9.0.3"/>
@@ -23,12 +22,6 @@
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4"/>
         <PackageReference Include="Evolve" Version="3.2.0"/>
         <PackageReference Include="Serilog" Version="2.10.0"/>
-    </ItemGroup>
-    <ItemGroup>
-        <None Remove="Persistence\Migrations\Evolve\Scripts\V1_05_12_2025_0__Create_Basic_DB_Structure.sql"/>
-    </ItemGroup>
-    <ItemGroup>
-        <None Remove="Persistence\Migrations\Evolve\Scripts\V1__Create_Basic_DB_Structure.sql"/>
     </ItemGroup>
     <ItemGroup>
         <None Remove="Persistence\Migrations\Evolve\Scripts\V1__06_12_2025__Create_Basic_DB_Structure.sql"/>

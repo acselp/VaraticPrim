@@ -10,8 +10,10 @@ public static class DependencyInjection
     public static void AddPersistance(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContextPool<PostgresDbContext>(options => options
-                                                        .UseNpgsql(configuration
-                                                                      .GetConnectionString("PostgresConnection")));
+                                                               .UseNpgsql(configuration
+                                                                             .GetConnectionString("PostgresConnection"))
+                                                               .UseSnakeCaseNamingConvention()
+                                                               .UseLazyLoadingProxies());
         services.AddMigrations();
     }
 }
