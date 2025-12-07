@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
+using NeoPay.Infrastructure.Persistence;
 
 namespace NeoPay.Infrastructure.Repository;
 
 public class MeterRepository : GenericRepository<MeterEntity>, IMeterRepository
 {
-    private readonly DbContext _context;
+    private readonly PostgresDbContext _context;
 
-    public MeterRepository(DbContext context) : base(context)
+    public MeterRepository(PostgresDbContext context) : base(context)
     {
         _context = context;
     }

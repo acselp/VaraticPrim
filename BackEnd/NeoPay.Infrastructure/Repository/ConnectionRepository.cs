@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
+using NeoPay.Infrastructure.Persistence;
 
 namespace NeoPay.Infrastructure.Repository;
 
 public class ConnectionRepository : GenericRepository<ConnectionEntity>, IConnectionRepository
 {
-    private readonly DbContext _context;
+    private readonly PostgresDbContext _context;
 
-    public ConnectionRepository(DbContext context) : base(context)
+    public ConnectionRepository(PostgresDbContext context) : base(context)
     {
         _context = context;
     }

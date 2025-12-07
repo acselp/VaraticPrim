@@ -3,14 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
 using NeoPay.Domain.Paged;
+using NeoPay.Infrastructure.Persistence;
 
 namespace NeoPay.Infrastructure.Repository;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
-    private readonly DbContext _context;
+    private readonly PostgresDbContext _context;
 
-    public GenericRepository(DbContext context)
+    public GenericRepository(PostgresDbContext context)
     {
         _context = context;
     }

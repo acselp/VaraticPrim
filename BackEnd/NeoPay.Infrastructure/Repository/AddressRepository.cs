@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
+using NeoPay.Infrastructure.Persistence;
 
 namespace NeoPay.Infrastructure.Repository;
 
 public class AddressRepository : GenericRepository<AddressEntity>, IAddressRepository
 {
-    private readonly DbContext _context;
+    private readonly PostgresDbContext _context;
 
-    public AddressRepository(DbContext context) : base(context)
+    public AddressRepository(PostgresDbContext context) : base(context)
     {
         _context = context;
     }

@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using NeoPay.Application.Repository;
 using NeoPay.Domain.Entities;
+using NeoPay.Infrastructure.Persistence;
 
 namespace NeoPay.Infrastructure.Repository;
 
 public class ConsumptionRecordRepository : GenericRepository<ConsumptionRecord>, IConsumptionRecordRepository
 {
-    private readonly DbContext _context;
+    private readonly PostgresDbContext _context;
 
-    public ConsumptionRecordRepository(DbContext context) : base(context)
+    public ConsumptionRecordRepository(PostgresDbContext context) : base(context)
     {
         _context = context;
     }
