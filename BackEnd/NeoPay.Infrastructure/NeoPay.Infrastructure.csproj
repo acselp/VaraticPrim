@@ -27,8 +27,11 @@
     </ItemGroup>
     <ItemGroup>
         <None Remove="Persistence\Migrations\Evolve\Scripts\V1__06_12_2025__Create_Basic_DB_Structure.sql"/>
-        <EmbeddedResource Include="Persistence\Migrations\Evolve\Scripts\V1__06_12_2025__Create_Basic_DB_Structure.sql">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Persistence\Migrations\Evolve\Scripts\V1__Create_Basic_DB_Structure.sql" />
+      <EmbeddedResource Include="Persistence\Migrations\Evolve\Scripts\V1__Create_Basic_DB_Structure.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 </Project>
