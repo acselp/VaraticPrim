@@ -13,6 +13,12 @@ public static class FrontEndErrors
         ErrorCode    = ApiErrorCodes.ValidationError,
         ErrorMessage = "Could not validate the model"
     };
+    
+    public static Error ConnectionExists { get; } = new()
+    {
+        ErrorCode    = ApiErrorCodes.Connection.ConnectionAlreadyExists,
+        ErrorMessage = "Connection already exists"
+    };
 
     public static Error CustomerAccountNrAlreadyExists { get; } = new()
     {

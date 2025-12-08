@@ -27,4 +27,9 @@ public class ConnectionRepository : GenericRepository<ConnectionEntity>, IConnec
             .Where(c => c.UtilityId == utilityId)
             .ToListAsync();
     }
+
+    public async Task<bool> ConnectionExists(int customerId, int utilityId)
+    {
+        return await Table.AnyAsync(c => c.CustomerId == customerId && c.UtilityId == utilityId);
+    }
 }

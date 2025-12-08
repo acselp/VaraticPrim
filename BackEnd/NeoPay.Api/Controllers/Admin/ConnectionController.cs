@@ -18,7 +18,7 @@ public class ConnectionController : BaseAdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateConnectionModel connection)
+    public async Task<IActionResult> Create([FromBody] CreateConnectionModel connection)
     {
         try
         {
@@ -33,10 +33,14 @@ public class ConnectionController : BaseAdminController
         {
             return NotFound(FrontEndErrors.ConnectionCouldNotBeFound);
         }
+        catch (ConnectionExistsException)
+        {
+            return BadRequest(FrontEndErrors.ConnectionExists);
+        }
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateConnectionModel connection)
+    public async Task<IActionResult> Update([FromBody] UpdateConnectionModel connection)
     {
         try
         {

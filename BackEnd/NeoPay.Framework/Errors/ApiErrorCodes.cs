@@ -34,6 +34,7 @@ public static class ApiErrorCodes
     {
         public const string ConnectionCouldNotBeFound = "connection_could_not_be_found";
         public const string ErrorLoadingConnections = "error_loading_connections";
+        public const string ConnectionAlreadyExists = "connection_already_exists";
     }
 
     public static class Utility

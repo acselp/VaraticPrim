@@ -21,7 +21,7 @@ public class ConnectionService
         _utilityRepository = utilityRepository;
     }
 
-    public async Task<ConnectionEntity> Create(ConnectionEntity entity)
+    public async Task Create(ConnectionEntity entity)
     {
         var customer = await _customerRepository.GetById(entity.CustomerId);
         if (customer == null)
@@ -30,8 +30,21 @@ public class ConnectionService
         var utility = await _utilityRepository.GetById(entity.UtilityId);
         if (utility == null)
             throw new NotFoundException($"Utility with ID {entity.UtilityId} not found");
+        
+        if (await _connectionRepository.ConnectionExists(customer.Id, utility.Id))
+            throw new ConnectionExistsException($"Connection with this customerId: {customer.Id} and this utilityId: {utility.Id} already exists");
 
-        return await _connectionRepository.Insert(entity);
+        var meterEntity = new MeterEntity
+        {
+            Status = 0,
+            SerialNumber = "123",
+            CreatedOnUtc = DateTime.UtcNow,
+            UpdatedOnUtc = DateTime.UtcNow
+        };
+
+        entity.Meter = meterEntity;
+        
+        await _connectionRepository.Insert(entity);
     }
 
     public async Task<ConnectionEntity> GetById(int id)

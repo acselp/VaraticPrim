@@ -1,3 +1,4 @@
+using System.Diagnostics.Metrics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NeoPay.Domain.Entities;
@@ -31,9 +32,9 @@ public class ConnectionEntityConfigurator : IEntityTypeConfiguration<ConnectionE
             .HasForeignKey(c => c.UtilityId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasMany(c => c.Meters)
+        builder.HasOne(c => c.Meter)
             .WithOne(m => m.Connection)
-            .HasForeignKey(m => m.ConnectionId)
+            .HasForeignKey<MeterEntity>(m => m.ConnectionId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -6,4 +6,5 @@ public interface IConnectionRepository : IGenericRepository<ConnectionEntity>
 {
     Task<IEnumerable<ConnectionEntity>> GetByCustomerId(int customerId);
     Task<IEnumerable<ConnectionEntity>> GetByUtilityId(int utilityId);
+    Task<bool> ConnectionExists(int customerId, int utilityId);
 }

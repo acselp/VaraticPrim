@@ -7,5 +7,5 @@ public class ConnectionEntity : BaseEntity
     public         int            UtilityId     { get; set; }
     public virtual CustomerEntity Customer      { get; set; } = null!;
     public virtual UtilityEntity  UtilityEntity { get; set; } = null!;
-    public virtual ICollection<MeterEntity> Meters { get; set; } = new List<MeterEntity>();
+    public virtual MeterEntity Meter { get; set; } = new();
 }

@@ -18,7 +18,7 @@ public class CustomerController : BaseAdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateCustomerModel customer)
+    public async Task<IActionResult> Create([FromBody] CreateCustomerModel customer)
     {
         try
         {
@@ -32,7 +32,7 @@ public class CustomerController : BaseAdminController
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateCustomerModel customer)
+    public async Task<IActionResult> Update([FromBody] UpdateCustomerModel customer)
     {
         try
         {

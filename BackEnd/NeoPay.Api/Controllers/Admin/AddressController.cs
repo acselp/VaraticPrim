@@ -18,7 +18,7 @@ public class AddressController : BaseAdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateAddressModel address)
+    public async Task<IActionResult> Create([FromBody] CreateAddressModel address)
     {
         try
         {
@@ -36,7 +36,7 @@ public class AddressController : BaseAdminController
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateAddressModel address)
+    public async Task<IActionResult> Update([FromBody] UpdateAddressModel address)
     {
         try
         {

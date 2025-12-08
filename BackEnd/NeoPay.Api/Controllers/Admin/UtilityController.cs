@@ -18,7 +18,7 @@ public class UtilityController : BaseAdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateUtilityModel utility)
+    public async Task<IActionResult> Create([FromBody] CreateUtilityModel utility)
     {
         try
         {
@@ -32,7 +32,7 @@ public class UtilityController : BaseAdminController
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(UpdateUtilityModel utility)
+    public async Task<IActionResult> Update([FromBody] UpdateUtilityModel utility)
     {
         try
         {
