@@ -7,7 +7,6 @@ using NeoPay.Framework.Models.Utility;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("utility")]
 public class UtilityController : BaseAdminController
 {
     private readonly UtilityManager _utilityManager;

@@ -7,7 +7,6 @@ using NeoPay.Framework.Models.Customer;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("customer")]
 public class CustomerController : BaseAdminController
 {
     private readonly CustomerManager _customerManager;
@@ -49,7 +48,7 @@ public class CustomerController : BaseAdminController
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
         try
@@ -77,7 +76,7 @@ public class CustomerController : BaseAdminController
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> GetById(int id)
     {
         try
