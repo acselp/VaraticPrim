@@ -1,5 +1,6 @@
 using FluentValidation;
 using NeoPay.Application.Service;
+using NeoPay.Domain.Exceptions;
 using NeoPay.Domain.Paged;
 using NeoPay.Framework.Mappers;
 using NeoPay.Framework.Models.Shared;
@@ -59,6 +60,9 @@ public class UtilityManager
     public async Task<UtilityModel> GetById(int id)
     {
         var entity = await _utilityService.GetById(id);
+        if (entity == null)
+            throw new NotFoundException($"Utility with ID {id} not found");
+
         return _utilityMapper.Map(entity);
     }
 }

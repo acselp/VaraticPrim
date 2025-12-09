@@ -24,13 +24,9 @@ public class CustomerService
         return await _customerRepository.Insert(entity);
     }
 
-    public async Task<CustomerEntity> GetById(int id)
+    public async Task<CustomerEntity?> GetById(int id)
     {
-        var entity = await _customerRepository.GetById(id);
-        if (entity == null)
-            throw new NotFoundException($"Customer with ID {id} not found");
-
-        return entity;
+        return await _customerRepository.GetById(id);
     }
 
     public async Task<IEnumerable<CustomerEntity>> GetAll()

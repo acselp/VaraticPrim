@@ -47,13 +47,9 @@ public class ConnectionService
         await _connectionRepository.Insert(entity);
     }
 
-    public async Task<ConnectionEntity> GetById(int id)
+    public async Task<ConnectionEntity?> GetById(int id)
     {
-        var entity = await _connectionRepository.GetById(id);
-        if (entity == null)
-            throw new NotFoundException($"Connection with ID {id} not found");
-
-        return entity;
+        return await _connectionRepository.GetById(id);
     }
 
     public async Task<IEnumerable<ConnectionEntity>> GetAll()

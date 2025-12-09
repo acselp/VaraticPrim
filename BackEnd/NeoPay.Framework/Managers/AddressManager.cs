@@ -1,5 +1,6 @@
 using FluentValidation;
 using NeoPay.Application.Service;
+using NeoPay.Domain.Exceptions;
 using NeoPay.Domain.Paged;
 using NeoPay.Framework.Mappers;
 using NeoPay.Framework.Models.Address;
@@ -58,6 +59,10 @@ public class AddressManager
 
     public async Task<AddressModel> GetById(int id)
     {
-        return _addressMapper.Map(await _addressService.GetById(id));
+        var entity = await _addressService.GetById(id);
+        if (entity == null)
+            throw new NotFoundException($"Address with ID {id} not found");
+
+        return _addressMapper.Map(entity);
     }
 }

@@ -25,14 +25,9 @@ public class AddressService
         return await _addressRepository.Insert(entity);
     }
 
-    public async Task<AddressEntity> GetById(int id)
+    public async Task<AddressEntity?> GetById(int id)
     {
-        var entity = await _addressRepository.GetById(id);
-        
-        if (entity == null)
-            throw new NotFoundException($"Address with ID {id} not found");
-        
-        return entity;
+        return await _addressRepository.GetById(id);
     }
 
     public async Task<IEnumerable<AddressEntity>> GetAll()

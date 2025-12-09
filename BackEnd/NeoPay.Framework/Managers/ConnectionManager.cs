@@ -1,5 +1,6 @@
 using FluentValidation;
 using NeoPay.Application.Service;
+using NeoPay.Domain.Exceptions;
 using NeoPay.Domain.Paged;
 using NeoPay.Framework.Mappers;
 using NeoPay.Framework.Models.Connection;
@@ -59,6 +60,9 @@ public class ConnectionManager
     public async Task<ConnectionModel> GetById(int id)
     {
         var entity = await _connectionService.GetById(id);
+        if (entity == null)
+            throw new NotFoundException($"Connection with ID {id} not found");
+
         return _connectionMapper.Map(entity);
     }
 }

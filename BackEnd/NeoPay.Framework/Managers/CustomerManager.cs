@@ -1,5 +1,6 @@
 using FluentValidation;
 using NeoPay.Application.Service;
+using NeoPay.Domain.Exceptions;
 using NeoPay.Domain.Filters;
 using NeoPay.Framework.Mappers;
 using NeoPay.Framework.Models.Customer;
@@ -59,6 +60,9 @@ public class CustomerManager
     public async Task<CustomerModel> GetById(int id)
     {
         var entity = await _customerService.GetById(id);
+        if (entity == null)
+            throw new NotFoundException($"Customer with ID {id} not found");
+
         return _customerMapper.Map(entity);
     }
 }

@@ -19,13 +19,9 @@ public class UtilityService
         return await _utilityRepository.Insert(entity);
     }
 
-    public async Task<UtilityEntity> GetById(int id)
+    public async Task<UtilityEntity?> GetById(int id)
     {
-        var entity = await _utilityRepository.GetById(id);
-        if (entity == null)
-            throw new NotFoundException($"Utility with ID {id} not found");
-
-        return entity;
+        return await _utilityRepository.GetById(id);
     }
 
     public async Task<IEnumerable<UtilityEntity>> GetAll()
