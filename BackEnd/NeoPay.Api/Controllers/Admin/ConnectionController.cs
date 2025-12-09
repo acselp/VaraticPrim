@@ -7,7 +7,7 @@ using NeoPay.Framework.Models.Connection;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("connection")]
+[Route("api/[Controller]/[Action]")]
 public class ConnectionController : BaseAdminController
 {
     private readonly ConnectionManager _connectionManager;

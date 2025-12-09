@@ -7,7 +7,7 @@ using NeoPay.Framework.Models.Address;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("address")]
+[Route("api/[Controller]/[Action]")]
 public class AddressController : BaseAdminController
 {
     private readonly AddressManager _addressManager;

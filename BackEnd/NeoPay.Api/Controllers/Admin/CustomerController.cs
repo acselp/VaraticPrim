@@ -7,6 +7,7 @@ using NeoPay.Framework.Models.Customer;
 
 namespace NeoPay.Api.Controllers.Admin;
 
+[Route("api/[Controller]/[Action]")]
 public class CustomerController : BaseAdminController
 {
     private readonly CustomerManager _customerManager;

@@ -21,16 +21,9 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllerRoute(
-                                         name: "default",
-                                         pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            // If you use attribute routing alongside, you still need this:
-        });
         app.UseSwagger();
         app.UseSwaggerUI();
+      
         app.UseCors("AllowFrontendCorsPolicy");
         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
     }
