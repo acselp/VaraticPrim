@@ -15,8 +15,7 @@ public static class DependencyInjection
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-        services.AddControllers()
-                .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
+        services.AddControllers();
 
         services.AddCors(options =>
         {

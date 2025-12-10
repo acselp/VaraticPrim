@@ -382,3 +382,8 @@ export type RichTableStyling = {
    */
   toolbar?: string
 }
+
+export interface GridCommand {
+  PageIndex: number;
+  PageSize: number;
+}

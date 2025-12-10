@@ -3,12 +3,13 @@ import { Badge, Edit, Mail, Phone, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { DataTableColumnHeader } from '@/components/data-table'
 import {
+  RichTableDataSource,
   RichTableRowActions,
   type RichTableSchema,
 } from '@/components/rich-table'
-import { customersData } from '@/features/customers/data/customers.ts'
 import { customerStatuses } from '@/features/customers/data/data.tsx'
 import { type Customer } from '@/features/customers/data/schema.ts'
+import { CustomerService } from '@/services/customer-service.ts'
 
 const rowActionsConfig: RichTableSchema<Customer>['rowActions'] = [
   {
@@ -46,7 +47,10 @@ const rowActionsConfig: RichTableSchema<Customer>['rowActions'] = [
 export const getSchema = (route: unknown): RichTableSchema<Customer> => {
   return {
     // Frontend strategy - pass array of data directly
-    dataSource: customersData,
+    dataSource: {
+      url: CustomerService.getAllPaginatedUrl(),
+      method: 'POST'
+    } as RichTableDataSource<Customer>,
 
     // Router configuration for URL state
     router: {
