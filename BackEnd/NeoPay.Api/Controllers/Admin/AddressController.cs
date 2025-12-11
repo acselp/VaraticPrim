@@ -7,7 +7,7 @@ using NeoPay.Framework.Models.Address;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("api/[Controller]/[Action]")]
+[Route("api/[controller]/[action]")]
 public class AddressController : BaseAdminController
 {
     private readonly AddressManager _addressManager;
@@ -18,7 +18,7 @@ public class AddressController : BaseAdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateAddressModel address)
+    public async Task<IActionResult> Create(CreateAddressModel address)
     {
         try
         {
@@ -36,7 +36,7 @@ public class AddressController : BaseAdminController
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] UpdateAddressModel address)
+    public async Task<IActionResult> Update(UpdateAddressModel address)
     {
         try
         {
@@ -53,7 +53,7 @@ public class AddressController : BaseAdminController
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
         try
@@ -68,7 +68,7 @@ public class AddressController : BaseAdminController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] GetAddressFilterModel filter)
+    public async Task<IActionResult> GetAll(GetAddressFilterModel filter)
     {
         try
         {
@@ -81,7 +81,7 @@ public class AddressController : BaseAdminController
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> GetById(int id)
     {
         try

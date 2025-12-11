@@ -7,7 +7,7 @@ using NeoPay.Framework.Models.Connection;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("api/[Controller]/[Action]")]
+[Route("api/[controller]/[action]")]
 public class ConnectionController : BaseAdminController
 {
     private readonly ConnectionManager _connectionManager;
@@ -18,7 +18,7 @@ public class ConnectionController : BaseAdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateConnectionModel connection)
+    public async Task<IActionResult> Create(CreateConnectionModel connection)
     {
         try
         {
@@ -40,7 +40,7 @@ public class ConnectionController : BaseAdminController
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] UpdateConnectionModel connection)
+    public async Task<IActionResult> Update(UpdateConnectionModel connection)
     {
         try
         {
@@ -57,7 +57,7 @@ public class ConnectionController : BaseAdminController
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
         try
@@ -72,7 +72,7 @@ public class ConnectionController : BaseAdminController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] GetConnectionFilterModel filter)
+    public async Task<IActionResult> GetAll(GetConnectionFilterModel filter)
     {
         try
         {
@@ -85,7 +85,7 @@ public class ConnectionController : BaseAdminController
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> GetById(int id)
     {
         try

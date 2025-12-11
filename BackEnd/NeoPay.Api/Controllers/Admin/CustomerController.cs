@@ -7,7 +7,7 @@ using NeoPay.Framework.Models.Customer;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("api/[Controller]/[Action]")]
+[Route("api/[controller]/[action]")]
 public class CustomerController : BaseAdminController
 {
     private readonly CustomerManager _customerManager;
@@ -32,7 +32,7 @@ public class CustomerController : BaseAdminController
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] UpdateCustomerModel customer)
+    public async Task<IActionResult> Update(UpdateCustomerModel customer)
     {
         try
         {

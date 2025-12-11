@@ -7,7 +7,7 @@ using NeoPay.Framework.Models.Utility;
 
 namespace NeoPay.Api.Controllers.Admin;
 
-[Route("api/[Controller]/[Action]")]
+[Route("api/[controller]/[action]")]
 public class UtilityController : BaseAdminController
 {
     private readonly UtilityManager _utilityManager;
@@ -18,7 +18,7 @@ public class UtilityController : BaseAdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateUtilityModel utility)
+    public async Task<IActionResult> Create(CreateUtilityModel utility)
     {
         try
         {
@@ -32,7 +32,7 @@ public class UtilityController : BaseAdminController
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] UpdateUtilityModel utility)
+    public async Task<IActionResult> Update(UpdateUtilityModel utility)
     {
         try
         {
@@ -49,7 +49,7 @@ public class UtilityController : BaseAdminController
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
         try
@@ -64,7 +64,7 @@ public class UtilityController : BaseAdminController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] GetUtilityFilterModel filter)
+    public async Task<IActionResult> GetAll(GetUtilityFilterModel filter)
     {
         try
         {
@@ -77,7 +77,7 @@ public class UtilityController : BaseAdminController
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet]
     public async Task<IActionResult> GetById(int id)
     {
         try

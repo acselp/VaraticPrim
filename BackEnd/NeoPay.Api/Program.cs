@@ -10,8 +10,6 @@ builder.Host.UseSerilog((ctx, lc) => lc
 var startup = new Startup(builder.Configuration);
 
 startup.ConfigureServices(builder.Services);
-    
-builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 

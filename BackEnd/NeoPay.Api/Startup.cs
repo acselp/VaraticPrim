@@ -23,8 +23,11 @@ public class Startup
         app.UseRouting();
         app.UseSwagger();
         app.UseSwaggerUI();
-      
         app.UseCors("AllowFrontendCorsPolicy");
         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+        app.UseEndpoints(endpoints => 
+        {
+            endpoints.MapControllers();
+        });
     }
 }
