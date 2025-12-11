@@ -63,8 +63,8 @@ public class CustomerController : BaseAdminController
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] GetCustomerFilterModel filter)
+    [HttpPost]
+    public async Task<IActionResult> GetAll([FromBody] GetCustomerFilterModel filter)
     {
         try
         {
